@@ -5,6 +5,7 @@ import { eq } from "drizzle-orm";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { authMiddleware, AuthRequest } from "../middlewares/auth_middleware";
 dotenv.config();
 
 const authRouter = Router();
@@ -138,4 +139,18 @@ authRouter.post("/tokenIsValid", async (req, res) => {
   }
 });
 
+authRouter.get("/", authMiddleware, async (req: AuthRequest, res) => {
+  try {
+    if (!req.user) {
+      res.status(401).json({ error: "User not found!" });
+      return;
+    }
+
+    const [user] = await db.select().from(users).where(eq(users.id, req.user));
+
+    res.json({ ...user, token: req.token });
+  } catch (e) {
+    res.status(500).json(false);
+  }
+});
 export default authRouter;
