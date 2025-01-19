@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/features/auth/pages/login_page.dart';
 import 'package:frontend/features/auth/pages/signup_page.dart';
+import 'package:frontend/features/home/pages/home_page.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -8,9 +9,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (_) => const SignupPage(),
       );
-    case LoginPage.routeName: 
+    case LoginPage.routeName:
       return MaterialPageRoute(
         builder: (_) => const LoginPage(),
+      );
+    case HomePage.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const HomePage(),
       );
     default:
       return MaterialPageRoute(
