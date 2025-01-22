@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'Sign Up',
+                    'Log In',
                     style: TextStyle(
                       fontSize: 50,
                       fontWeight: FontWeight.bold,

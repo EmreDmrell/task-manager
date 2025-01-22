@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/core/services/sp_service.dart';
 
 class HomePage extends StatefulWidget {
-  static const routeName = '/login';
+  static const routeName = '/home';
   const HomePage({super.key});
 
   @override
