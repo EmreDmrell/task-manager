@@ -23,18 +23,3 @@ String rgbToHex(Color color) {
 Color hexToRgb(String hex) {
   return Color(int.parse(hex, radix: 16) + 0xFF000000);
 }
-
-var tasks = [
-  {
-    "color": Colors.brown,
-    "headerText": "Task 1",
-    "descriptionText": "This is the first task",
-    "dueAt": DateTime.now(),
-  },
-  {
-    "color": Colors.cyan,
-    "headerText": "Task 2",
-    "descriptionText": "This is the second task",
-    "dueAt": DateTime.now(),
-  },
-];
