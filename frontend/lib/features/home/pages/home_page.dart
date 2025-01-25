@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/constants/utils.dart';
@@ -23,6 +24,12 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     final user = context.read<AuthCubit>().state as AuthLoggedIn;
     context.read<TasksCubit>().getTasks(token: user.user.token);
+    Connectivity().onConnectivityChanged.listen((event) async {
+      if (event.contains(ConnectivityResult.wifi) ||
+          event.contains(ConnectivityResult.mobile)) {
+        await context.read<TasksCubit>().syncTasks(token: user.user.token);
+      }
+    });
   }
 
   @override

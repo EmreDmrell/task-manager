@@ -1,10 +1,15 @@
 import 'dart:convert';
 
 import 'package:frontend/core/constants/constants.dart';
+import 'package:frontend/core/constants/utils.dart';
+import 'package:frontend/features/home/repository/task_local_repository.dart';
 import 'package:frontend/models/task_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:uuid/uuid.dart';
 
 class Taskremoterepository {
+  final taskLocalRepository = TaskLocalRepository();
+
   Future<TaskModel> createTask({
     required String title,
     required String description,
@@ -37,7 +42,23 @@ class Taskremoterepository {
       final taskData = jsonDecode(res.body)['task'];
       return TaskModel.fromMap(taskData);
     } catch (e) {
-      rethrow;
+      try {
+        final taskModel = TaskModel(
+          id: const Uuid().v6(),
+          uid: uid,
+          title: title,
+          description: description,
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+          dueAt: dueAt,
+          color: hexToRgb(hexColor),
+          isSynced: 0,
+        );
+        await taskLocalRepository.insertTask(taskModel);
+        return taskModel;
+      } catch (e) {
+        rethrow;
+      }
     }
   }
 
@@ -63,9 +84,44 @@ class Taskremoterepository {
         tasksList.add(TaskModel.fromMap(task));
       }
 
+      await taskLocalRepository.insertTasks(tasksList);
+
       return tasksList;
     } catch (e) {
+      final tasks = await taskLocalRepository.getTasks();
+      if (tasks.isNotEmpty) {
+        return tasks;
+      }
       rethrow;
+    }
+  }
+
+  Future<bool> syncTasks({
+    required String token,
+    required List<TaskModel> tasks,
+  }) async {
+    try {
+      final taskListInMap = [];
+      for (final task in tasks) {
+        taskListInMap.add(task.toMap());
+      }
+      final res = await http.post(
+        Uri.parse("${Constants.backendUri}/tasks/sync"),
+        headers: {
+          "Content-Type": "application/json",
+          "charset": "utf-8",
+          "x-auth-token": token,
+        },
+        body: jsonEncode(taskListInMap),
+      );
+      if (res.statusCode != 201) {
+        throw jsonDecode(res.body)['error'];
+      }
+
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
     }
   }
 }

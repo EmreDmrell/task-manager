@@ -41,4 +41,38 @@ taskRouter.delete("/", authMiddleware, async (req: AuthRequest, res) => {
   }
 });
 
+taskRouter.post("/sync", authMiddleware, async (req: AuthRequest, res) => {
+  try {
+    const tasksList = req.body;
+
+    // Check if tasksList is empty
+    if (!Array.isArray(tasksList) || tasksList.length === 0) {
+      res.status(400).json({ error: "No tasks provided for sync" });
+    } else {
+      const filteredTasks: NewTask[] = [];
+
+      for (let t of tasksList) {
+        t = {
+          ...t,
+          dueAt: new Date(t.dueAt),
+          createdAt: new Date(t.createdAt),
+          updatedAt: new Date(t.updatedAt),
+          uid: req.user,
+        };
+        filteredTasks.push(t);
+      }
+
+      const pushedTasks = await db
+        .insert(tasks)
+        .values(filteredTasks)
+        .returning();
+
+      res.status(201).json(pushedTasks);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error });
+  }
+});
+
 export default taskRouter;

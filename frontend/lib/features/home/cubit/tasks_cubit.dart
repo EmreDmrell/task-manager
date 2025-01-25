@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/constants/utils.dart';
 import 'package:frontend/features/home/repository/taskRemoteRepository.dart';
+import 'package:frontend/features/home/repository/task_local_repository.dart';
 import 'package:frontend/models/task_model.dart';
 
 part 'tasks_state.dart';
@@ -10,6 +11,7 @@ part 'tasks_state.dart';
 class TasksCubit extends Cubit<TasksState> {
   TasksCubit() : super(TasksInitial());
   final taskremoterepository = Taskremoterepository();
+  final taskLocalRepository = TaskLocalRepository();
 
   Future<void> createTask({
     required String title,
@@ -29,6 +31,7 @@ class TasksCubit extends Cubit<TasksState> {
         uid: uid,
         dueAt: dueAt,
       );
+      await taskLocalRepository.insertTask(taskModel);
       emit(AddNewTaskSuccess(taskModel));
     } catch (e) {
       emit(TasksError(e.toString()));
@@ -42,6 +45,23 @@ class TasksCubit extends Cubit<TasksState> {
       emit(GetTasksSuccess(tasks));
     } catch (e) {
       emit(TasksError(e.toString()));
+    }
+  }
+
+  Future<void> syncTasks({required String token}) async {
+    final unsyncedTasks = await taskLocalRepository.getUnsyncedTasks();
+
+    if (unsyncedTasks.isEmpty) {
+      return;
+    }
+
+    final isSynced = await taskremoterepository.syncTasks(
+        token: token, tasks: unsyncedTasks);
+    if (isSynced) {
+      for (final task in unsyncedTasks) {
+        await taskLocalRepository.updateRowValue(task.id, 1);
+      }
+      print('Tasks synced');
     }
   }
 }
