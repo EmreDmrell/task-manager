@@ -34,7 +34,8 @@ class Taskremoterepository {
         throw jsonDecode(res.body)['error'];
       }
 
-      return TaskModel.fromJson(res.body);
+      final taskData = jsonDecode(res.body)['task'];
+      return TaskModel.fromMap(taskData);
     } catch (e) {
       rethrow;
     }
