@@ -2,7 +2,7 @@ import { Router } from "express";
 import { authMiddleware, AuthRequest } from "../middlewares/auth_middleware";
 import { NewTask, tasks } from "../db/schema";
 import { db } from "../db";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 
 const taskRouter = Router();
 
@@ -60,6 +60,16 @@ taskRouter.post("/sync", authMiddleware, async (req: AuthRequest, res) => {
     const pushedTasks = await db
       .insert(tasks)
       .values(filteredTasks)
+      .onConflictDoUpdate({
+        target: tasks.id,
+        set: {
+          title: sql`EXCLUDED.title`,
+          description: sql`EXCLUDED.description`,
+          dueAt: sql`EXCLUDED.due_at`,
+          hexColor: sql`EXCLUDED.hex_color`,
+          updatedAt: sql`EXCLUDED.updated_at`,
+        },
+      })
       .returning();
 
     res.status(201).json(pushedTasks);

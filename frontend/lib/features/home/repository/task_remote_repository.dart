@@ -43,8 +43,13 @@ class TaskRemoteRepository {
       return TaskModel.fromMap(taskData);
     } catch (e) {
       try {
+        String id;
+        do {
+          id = const Uuid().v6();
+        } while (await taskLocalRepository.getTaskById(id) != null);
+
         final taskModel = TaskModel(
-          id: const Uuid().v6(),
+          id: id,
           uid: uid,
           title: title,
           description: description,

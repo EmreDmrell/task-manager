@@ -99,16 +99,29 @@ class TaskLocalRepository {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query(
       tableName,
-      where: 'isDeleted = ?',
-      whereArgs: [1],
+      where: 'isSynced =? AND isDeleted = ?',
+      whereArgs: [0, 1],
     );
     if (maps.isNotEmpty) {
       return List.generate(maps.length, (i) {
         return TaskModel.fromMap(maps[i]);
       });
     }
-    print(maps);
+    print('getUnsyncedDeletedTasks \n ${maps}');
     return [];
+  }
+
+  Future<TaskModel?> getTaskById(String id) async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      tableName,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    if (maps.isNotEmpty) {
+      return TaskModel.fromMap(maps.first);
+    }
+    return null;
   }
 
   Future<void> updateRowValue(String id, int newValue) async {

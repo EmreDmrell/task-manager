@@ -80,37 +80,52 @@ class TasksCubit extends Cubit<TasksState> {
   }
 
   Future<void> syncTasks({required String token}) async {
-    final unsyncedTasks = await taskLocalRepository.getUnsyncedTasks();
+    try {
+      final unsyncedTasks = await taskLocalRepository.getUnsyncedTasks();
 
-    if (unsyncedTasks.isEmpty) {
-      return;
-    }
-
-    final isSynced = await taskRemoteRepository.syncTasks(
-        token: token, tasks: unsyncedTasks);
-    if (isSynced) {
-      for (final task in unsyncedTasks) {
-        await taskLocalRepository.updateRowValue(task.id, 1);
+      if (unsyncedTasks.isEmpty) {
+        return;
       }
-      print('Tasks synced');
+
+      final isSynced = await taskRemoteRepository.syncTasks(
+          token: token, tasks: unsyncedTasks);
+      if (isSynced) {
+        for (final task in unsyncedTasks) {
+          await taskLocalRepository.updateRowValue(task.id, 1);
+        }
+        print('Tasks synced');
+
+        // Fetch updated tasks from remote and update state
+        final tasks = await taskRemoteRepository.getTasks(token: token);
+        emit(GetTasksSuccess(tasks));
+      }
+    } catch (e) {
+      emit(TasksError(e.toString()));
     }
   }
 
   Future<void> syncDeletedTasks({required String token}) async {
-    final unsyncedDeletedTasks =
-        await taskLocalRepository.getUnsyncedDeletedTasks();
+    try {
+      final unsyncedDeletedTasks =
+          await taskLocalRepository.getUnsyncedDeletedTasks();
 
-    if (unsyncedDeletedTasks.isEmpty) {
-      return;
-    }
-
-    final isSynced = await taskRemoteRepository.syncDeletedTasks(
-        token: token, tasks: unsyncedDeletedTasks);
-    if (isSynced) {
-      for (final task in unsyncedDeletedTasks) {
-        await taskLocalRepository.deleteTask(task.id);
+      if (unsyncedDeletedTasks.isEmpty) {
+        return;
       }
-      print('Deleted Tasks synced');
+
+      final isSynced = await taskRemoteRepository.syncDeletedTasks(
+          token: token, tasks: unsyncedDeletedTasks);
+      if (isSynced) {
+        for (final task in unsyncedDeletedTasks) {
+          await taskLocalRepository.deleteTask(task.id);
+        }
+        print('Deleted Tasks synced');
+        // after deletion from remote database gets tasks to refresh the taskList
+        final tasks = await taskRemoteRepository.getTasks(token: token);
+        emit(GetTasksSuccess(tasks));
+      }
+    } catch (e) {
+      emit(TasksError(e.toString()));
     }
   }
 }
