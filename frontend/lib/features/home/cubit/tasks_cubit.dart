@@ -62,7 +62,7 @@ class TasksCubit extends Cubit<TasksState> {
         if (success) {
           await taskLocalRepository
               .deleteTask(taskId); // Hard delete if online delete successful
-          final tasks = await taskLocalRepository.getTasks();
+          final tasks = await taskRemoteRepository.getTasks(token: token);
           emit(GetTasksSuccess(tasks));
           return;
         }
@@ -125,6 +125,7 @@ class TasksCubit extends Cubit<TasksState> {
         emit(GetTasksSuccess(tasks));
       }
     } catch (e) {
+      print('syncDeletedTasks taskCubit: $e');
       emit(TasksError(e.toString()));
     }
   }

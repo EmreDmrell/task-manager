@@ -171,8 +171,8 @@ class TaskRemoteRepository {
         },
         body: jsonEncode(taskListInMap),
       );
-      if (res.statusCode != 201) {
-        throw jsonDecode(res.body)['error'];
+      if (res.statusCode != 200) {
+        throw Exception('Failed to sync deleted tasks');
       }
 
       return true;

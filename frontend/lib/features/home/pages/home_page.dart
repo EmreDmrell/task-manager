@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,24 +20,73 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   DateTime selectedDate = DateTime.now();
+  late TasksCubit tasksCubit;
+  late String userToken;
+  StreamSubscription? _connectivitySubscription;
 
   @override
   void initState() {
     super.initState();
-    final user = context.read<AuthCubit>().state as AuthLoggedIn;
-    context.read<TasksCubit>().getTasks(token: user.user.token);
-    Connectivity().onConnectivityChanged.listen((event) async {
-      if (event.contains(ConnectivityResult.wifi) ||
-          event.contains(ConnectivityResult.mobile)) {
-        // ignore: use_build_context_synchronously
-        await context.read<TasksCubit>().syncTasks(token: user.user.token);
+    _initializeState();
+  }
 
-        // ignore: use_build_context_synchronously
-        await context
-            .read<TasksCubit>()
-            .syncDeletedTasks(token: user.user.token);
-      }
+  void _initializeState() {
+    // Get references safely at initialization
+    if (!mounted) return;
+
+    final authCubit = context.read<AuthCubit>();
+    if (authCubit.state is AuthLoggedIn) {
+      final user = (authCubit.state as AuthLoggedIn).user;
+      userToken = user.token;
+      tasksCubit = context.read<TasksCubit>();
+
+      // Initial tasks fetch
+      tasksCubit.getTasks(token: userToken);
+
+      // Setup connectivity listener
+      _setupConnectivityListener();
+    }
+  }
+
+  Future<void> _setupConnectivityListener() async {
+    _connectivitySubscription = Connectivity()
+        .onConnectivityChanged
+        .listen((List<ConnectivityResult> event) {
+      _handleConnectivityChange(event);
     });
+  }
+
+  bool _isSyncing = false;
+
+  Future<void> _handleConnectivityChange(List<ConnectivityResult> event) async {
+    if (!mounted || _isSyncing) return;
+
+    final hasInternet = event.contains(ConnectivityResult.wifi) ||
+        event.contains(ConnectivityResult.mobile);
+
+    if (hasInternet) {
+      try {
+        _isSyncing = true;
+        await tasksCubit.syncDeletedTasks(token: userToken);
+        if (mounted) {
+          await tasksCubit.syncTasks(token: userToken);
+        }
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Failed to sync tasks: ${e.toString()}')),
+          );
+        }
+      } finally {
+        _isSyncing = false;
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _connectivitySubscription?.cancel();
+    super.dispose();
   }
 
   @override
@@ -105,10 +156,8 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           onDismissed: (direction) {
-                            AuthLoggedIn user =
-                                context.read<AuthCubit>().state as AuthLoggedIn;
                             context.read<TasksCubit>().deleteTask(
-                                  token: user.user.token,
+                                  token: userToken,
                                   taskId: task.id,
                                 );
                           },

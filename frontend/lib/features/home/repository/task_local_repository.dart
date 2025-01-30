@@ -107,7 +107,7 @@ class TaskLocalRepository {
         return TaskModel.fromMap(maps[i]);
       });
     }
-    print('getUnsyncedDeletedTasks \n ${maps}');
+    print('getUnsyncedDeletedTasks ${maps}');
     return [];
   }
 
