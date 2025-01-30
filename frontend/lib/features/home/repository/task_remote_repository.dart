@@ -96,6 +96,11 @@ class Taskremoterepository {
     }
   }
 
+  Future<bool> deleteTask({
+    required String token,
+    required String taskId,
+  }) async {}
+
   Future<bool> syncTasks({
     required String token,
     required List<TaskModel> tasks,
