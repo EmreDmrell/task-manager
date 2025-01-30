@@ -23,7 +23,7 @@ class AuthCubit extends Cubit<AuthState> {
         emit(AuthInitial());
       }
     } catch (e) {
-      print(e);
+      print('authCubit getUserData: $e');
       emit(AuthInitial());
     }
   }

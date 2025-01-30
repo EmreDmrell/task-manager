@@ -1,8 +1,9 @@
 import 'dart:ui';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/constants/utils.dart';
-import 'package:frontend/features/home/repository/taskRemoteRepository.dart';
+import 'package:frontend/features/home/repository/task_remote_repository.dart';
 import 'package:frontend/features/home/repository/task_local_repository.dart';
 import 'package:frontend/models/task_model.dart';
 
@@ -10,7 +11,7 @@ part 'tasks_state.dart';
 
 class TasksCubit extends Cubit<TasksState> {
   TasksCubit() : super(TasksInitial());
-  final taskremoterepository = Taskremoterepository();
+  final taskRemoteRepository = TaskRemoteRepository();
   final taskLocalRepository = TaskLocalRepository();
 
   Future<void> createTask({
@@ -23,7 +24,7 @@ class TasksCubit extends Cubit<TasksState> {
   }) async {
     try {
       emit(TasksLoading());
-      final taskModel = await taskremoterepository.createTask(
+      final taskModel = await taskRemoteRepository.createTask(
         title: title,
         description: description,
         hexColor: rgbToHex(color),
@@ -41,9 +42,39 @@ class TasksCubit extends Cubit<TasksState> {
   Future<void> getTasks({required String token}) async {
     try {
       emit(TasksLoading());
-      final tasks = await taskremoterepository.getTasks(token: token);
+      final tasks = await taskRemoteRepository.getTasks(token: token);
       emit(GetTasksSuccess(tasks));
     } catch (e) {
+      emit(TasksError(e.toString()));
+    }
+  }
+
+  Future<void> deleteTask({
+    required String token,
+    required String taskId,
+  }) async {
+    try {
+      final connectivityResult = await Connectivity().checkConnectivity();
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        final success =
+            await taskRemoteRepository.deleteTask(token: token, taskId: taskId);
+        if (success) {
+          await taskLocalRepository
+              .deleteTask(taskId); // Hard delete if online delete successful
+          final tasks = await taskLocalRepository.getTasks();
+          emit(GetTasksSuccess(tasks));
+          return;
+        }
+      }
+
+      // If offline or remote delete failed, do soft delete
+      await taskLocalRepository.softDeleteTask(taskId);
+      // Get updated tasks (will not include soft-deleted tasks)
+      final tasks = await taskLocalRepository.getTasks();
+      emit(GetTasksSuccess(tasks));
+    } catch (e) {
+      print('deleteTasks taskCubit: $e');
       emit(TasksError(e.toString()));
     }
   }
@@ -55,13 +86,31 @@ class TasksCubit extends Cubit<TasksState> {
       return;
     }
 
-    final isSynced = await taskremoterepository.syncTasks(
+    final isSynced = await taskRemoteRepository.syncTasks(
         token: token, tasks: unsyncedTasks);
     if (isSynced) {
       for (final task in unsyncedTasks) {
         await taskLocalRepository.updateRowValue(task.id, 1);
       }
       print('Tasks synced');
+    }
+  }
+
+  Future<void> syncDeletedTasks({required String token}) async {
+    final unsyncedDeletedTasks =
+        await taskLocalRepository.getUnsyncedDeletedTasks();
+
+    if (unsyncedDeletedTasks.isEmpty) {
+      return;
+    }
+
+    final isSynced = await taskRemoteRepository.syncDeletedTasks(
+        token: token, tasks: unsyncedDeletedTasks);
+    if (isSynced) {
+      for (final task in unsyncedDeletedTasks) {
+        await taskLocalRepository.deleteTask(task.id);
+      }
+      print('Deleted Tasks synced');
     }
   }
 }

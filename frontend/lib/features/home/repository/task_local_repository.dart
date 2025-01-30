@@ -17,8 +17,18 @@ class TaskLocalRepository {
 
   Future<Database> _initDb() async {
     final path = join(await getDatabasesPath(), 'tasks.db');
-    return openDatabase(path, version: 1, onCreate: (db, version) {
-      return db.execute('''
+    return openDatabase(
+      path,
+      version: 2,
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (oldVersion < newVersion) {
+          await db.execute(
+            'ALTER TABLE $tableName ADD COLUMN isDeleted INTEGER NOT NULL DEFAULT 0',
+          );
+        }
+      },
+      onCreate: (db, version) {
+        return db.execute('''
             CREATE TABLE $tableName(
               id TEXT PRIMARY KEY,
               title TEXT NOT NULL,
@@ -31,7 +41,8 @@ class TaskLocalRepository {
               isSynced INTEGER NOT NULL
             )
       ''');
-    });
+      },
+    );
   }
 
   Future<void> insertTask(TaskModel task) async {
@@ -56,7 +67,11 @@ class TaskLocalRepository {
 
   Future<List<TaskModel>> getTasks() async {
     final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query(tableName);
+    final List<Map<String, dynamic>> maps = await db.query(
+      tableName,
+      where: 'isDeleted = ?',
+      whereArgs: [0],
+    );
     if (maps.isNotEmpty) {
       return List.generate(maps.length, (i) {
         return TaskModel.fromMap(maps[i]);
@@ -69,14 +84,30 @@ class TaskLocalRepository {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query(
       tableName,
-      where: 'isSynced = ?',
-      whereArgs: [0],
+      where: 'isSynced = ? AND isDeleted = ?',
+      whereArgs: [0, 0],
     );
     if (maps.isNotEmpty) {
       return List.generate(maps.length, (i) {
         return TaskModel.fromMap(maps[i]);
       });
     }
+    return [];
+  }
+
+  Future<List<TaskModel>> getUnsyncedDeletedTasks() async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      tableName,
+      where: 'isDeleted = ?',
+      whereArgs: [1],
+    );
+    if (maps.isNotEmpty) {
+      return List.generate(maps.length, (i) {
+        return TaskModel.fromMap(maps[i]);
+      });
+    }
+    print(maps);
     return [];
   }
 
@@ -91,5 +122,28 @@ class TaskLocalRepository {
     if (result == 0) {
       throw Exception('Failed to update the row');
     }
+  }
+
+  Future<void> deleteTask(String taskId) async {
+    final db = await database;
+    await db.delete(
+      tableName,
+      where: 'id = ?',
+      whereArgs: [taskId],
+    );
+  }
+
+  // Soft delete, when there is no internet connection
+  Future<void> softDeleteTask(String taskId) async {
+    final db = await database;
+    await db.update(
+      tableName,
+      {
+        'isDeleted': 1,
+        'isSynced': 0,
+      },
+      where: 'id = ?',
+      whereArgs: [taskId],
+    );
   }
 }

@@ -7,7 +7,7 @@ import 'package:frontend/models/task_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:uuid/uuid.dart';
 
-class Taskremoterepository {
+class TaskRemoteRepository {
   final taskLocalRepository = TaskLocalRepository();
 
   Future<TaskModel> createTask({
@@ -53,6 +53,7 @@ class Taskremoterepository {
           dueAt: dueAt,
           color: hexToRgb(hexColor),
           isSynced: 0,
+          isDeleted: 0,
         );
         await taskLocalRepository.insertTask(taskModel);
         return taskModel;
@@ -99,7 +100,24 @@ class Taskremoterepository {
   Future<bool> deleteTask({
     required String token,
     required String taskId,
-  }) async {}
+  }) async {
+    try {
+      final res = await http.delete(
+        Uri.parse("${Constants.backendUri}/tasks/$taskId"),
+        headers: {
+          "Content-Type": "application/json",
+          "charset": "utf-8",
+          "x-auth-token": token,
+        },
+      );
+      if (res.statusCode != 200) {
+        throw jsonDecode(res.body)['error'];
+      }
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 
   Future<bool> syncTasks({
     required String token,
@@ -125,7 +143,36 @@ class Taskremoterepository {
 
       return true;
     } catch (e) {
-      print(e);
+      print('syncTasks task_remote_repo: $e');
+      return false;
+    }
+  }
+
+  Future<bool> syncDeletedTasks({
+    required String token,
+    required List<TaskModel> tasks,
+  }) async {
+    try {
+      final taskListInMap = [];
+      for (final task in tasks) {
+        taskListInMap.add(task.toMap());
+      }
+      final res = await http.post(
+        Uri.parse("${Constants.backendUri}/tasks/sync-deleted"),
+        headers: {
+          "Content-Type": "application/json",
+          "charset": "utf-8",
+          "x-auth-token": token,
+        },
+        body: jsonEncode(taskListInMap),
+      );
+      if (res.statusCode != 201) {
+        throw jsonDecode(res.body)['error'];
+      }
+
+      return true;
+    } catch (e) {
+      print('syncDeletedTasks task_remote_repo: $e');
       return false;
     }
   }

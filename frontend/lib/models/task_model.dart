@@ -13,6 +13,7 @@ class TaskModel {
   final DateTime updatedAt;
   final DateTime dueAt;
   final int isSynced;
+  final int isDeleted;
   TaskModel({
     required this.id,
     required this.uid,
@@ -23,6 +24,7 @@ class TaskModel {
     required this.dueAt,
     required this.color,
     required this.isSynced,
+    required this.isDeleted,
   });
 
   TaskModel copyWith({
@@ -35,6 +37,7 @@ class TaskModel {
     DateTime? dueAt,
     Color? color,
     int? isSynced,
+    int? isDeleted,
   }) {
     return TaskModel(
       id: id ?? this.id,
@@ -46,6 +49,7 @@ class TaskModel {
       dueAt: dueAt ?? this.dueAt,
       color: color ?? this.color,
       isSynced: isSynced ?? this.isSynced,
+      isDeleted: isDeleted ?? this.isDeleted,
     );
   }
 
@@ -60,6 +64,7 @@ class TaskModel {
       'dueAt': dueAt.toIso8601String(),
       'hexColor': rgbToHex(color),
       'isSynced': isSynced,
+      'isDeleted': isDeleted,
     };
   }
 
@@ -74,6 +79,7 @@ class TaskModel {
       dueAt: DateTime.parse(map['dueAt']),
       color: hexToRgb(map['hexColor']),
       isSynced: map['isSynced'] ?? 1,
+      isDeleted: map['isDeleted'] ?? 0,
     );
   }
 
@@ -99,7 +105,8 @@ class TaskModel {
         other.updatedAt == updatedAt &&
         other.dueAt == dueAt &&
         other.color == color &&
-        other.isSynced == isSynced;
+        other.isSynced == isSynced &&
+        other.isDeleted == isDeleted;
   }
 
   @override
@@ -112,6 +119,7 @@ class TaskModel {
         updatedAt.hashCode ^
         dueAt.hashCode ^
         color.hashCode ^
-        isSynced.hashCode;
+        isSynced.hashCode ^
+        isDeleted.hashCode;
   }
 }

@@ -27,7 +27,13 @@ class _HomePageState extends State<HomePage> {
     Connectivity().onConnectivityChanged.listen((event) async {
       if (event.contains(ConnectivityResult.wifi) ||
           event.contains(ConnectivityResult.mobile)) {
+        // ignore: use_build_context_synchronously
         await context.read<TasksCubit>().syncTasks(token: user.user.token);
+
+        // ignore: use_build_context_synchronously
+        await context
+            .read<TasksCubit>()
+            .syncDeletedTasks(token: user.user.token);
       }
     });
   }
@@ -86,36 +92,57 @@ class _HomePageState extends State<HomePage> {
                       itemCount: tasks.length,
                       itemBuilder: (context, index) {
                         final task = tasks[index];
-                        return Row(
-                          children: [
-                            Expanded(
-                              child: TaskCard(
-                                color: task.color,
-                                headerText: task.title,
-                                descriptionText: task.description,
-                              ),
+                        return Dismissible(
+                          key: Key(task.id),
+                          direction: DismissDirection.endToStart,
+                          background: Container(
+                            color: Colors.red,
+                            alignment: Alignment.centerRight,
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: const Icon(
+                              Icons.delete,
+                              color: Colors.white,
                             ),
-                            Container(
-                              height: 10,
-                              width: 10,
-                              decoration: BoxDecoration(
-                                color: strengthenColor(
-                                  task.color,
-                                  0.69,
+                          ),
+                          onDismissed: (direction) {
+                            AuthLoggedIn user =
+                                context.read<AuthCubit>().state as AuthLoggedIn;
+                            context.read<TasksCubit>().deleteTask(
+                                  token: user.user.token,
+                                  taskId: task.id,
+                                );
+                          },
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: TaskCard(
+                                  color: task.color,
+                                  headerText: task.title,
+                                  descriptionText: task.description,
                                 ),
-                                shape: BoxShape.circle,
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Text(
-                                DateFormat.jm().format(task.dueAt),
-                                style: TextStyle(
-                                  fontSize: 17,
+                              Container(
+                                height: 10,
+                                width: 10,
+                                decoration: BoxDecoration(
+                                  color: strengthenColor(
+                                    task.color,
+                                    0.69,
+                                  ),
+                                  shape: BoxShape.circle,
                                 ),
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  DateFormat.jm().format(task.dueAt),
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         );
                       },
                     ),
