@@ -5,14 +5,17 @@ import 'package:frontend/features/auth/pages/login_page.dart';
 import 'package:frontend/features/home/cubit/tasks_cubit.dart';
 import 'package:frontend/features/home/pages/home_page.dart';
 import 'package:frontend/router.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 void main() {
-  runApp(MultiBlocProvider(
-    providers: [
-      BlocProvider(create: (_) => AuthCubit()),
-      BlocProvider(create: (_) => TasksCubit()),
-    ],
-    child: const MyApp(),
+  runApp(ShowCaseWidget(
+    builder: (context) => MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => AuthCubit()),
+        BlocProvider(create: (_) => TasksCubit()),
+      ],
+      child: const MyApp(),
+    ),
   ));
 }
 
@@ -77,6 +80,9 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
         useMaterial3: true,
+        textSelectionTheme: const TextSelectionThemeData(
+          selectionHandleColor: Colors.transparent,
+        ),
       ),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: (settings) => generateRoute(settings),

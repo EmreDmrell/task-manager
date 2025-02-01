@@ -10,4 +10,9 @@ class SpService {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('x-auth-token');
   }
+
+  Future<void> removeToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('x-auth-token');
+  }
 }
