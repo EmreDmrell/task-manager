@@ -4,7 +4,9 @@ import 'package:frontend/features/auth/cubit/auth_cubit.dart';
 import 'package:frontend/features/auth/pages/login_page.dart';
 import 'package:frontend/features/home/cubit/tasks_cubit.dart';
 import 'package:frontend/features/home/pages/home_page.dart';
+import 'package:frontend/features/onboarding/pages/onboarding_screen.dart';
 import 'package:frontend/router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 void main() {
@@ -27,12 +29,25 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // This widget is the root of your application.
+  bool _initialized = false;
+  bool _hasSeenOnboarding = false;
 
   @override
   void initState() {
     super.initState();
-    context.read<AuthCubit>().getUserData();
+    _checkFirstSeen();
+  }
+
+  Future<void> _checkFirstSeen() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      setState(() {
+        _hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
+        _initialized = true;
+      });
+    } catch (e) {
+      print('Error checking first seen: $e');
+    }
   }
 
   @override
@@ -86,12 +101,20 @@ class _MyAppState extends State<MyApp> {
       ),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
-        if (state is AuthLoggedIn) {
-          return HomePage();
-        }
-        return LoginPage();
-      }),
+      home: !_initialized
+          ? const Center(child: CircularProgressIndicator())
+          : !_hasSeenOnboarding
+              ? const OnboardingScreen()
+              : BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
+                  if (state is AuthInitial) {
+                    context.read<AuthCubit>().getUserData();
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (state is AuthLoggedIn) {
+                    return const HomePage();
+                  }
+                  return const LoginPage();
+                }),
     );
   }
 }
