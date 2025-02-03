@@ -59,6 +59,18 @@
 - Dart SDK
 - Node.js
 - Docker (for backend)
+  
+### :key: Environment Variables
+To run this project, you will need to add the following environment variables to your .env file
+
+`DATABASE_URL`
+`DB_HOST`
+`DB_PORT`
+`PORT`
+`POSTGRES_USER`
+`POSTGRES_PASSWORD`
+`POSTGRES_DB`
+`JWT_KEY`
 
 
 ### :gear: Installation
