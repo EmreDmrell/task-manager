@@ -35,6 +35,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    context.read<AuthCubit>().getUserData();
     _checkFirstSeen();
   }
 
@@ -106,10 +107,6 @@ class _MyAppState extends State<MyApp> {
           : !_hasSeenOnboarding
               ? const OnboardingScreen()
               : BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
-                  if (state is AuthInitial) {
-                    context.read<AuthCubit>().getUserData();
-                    return const Center(child: CircularProgressIndicator());
-                  }
                   if (state is AuthLoggedIn) {
                     return const HomePage();
                   }

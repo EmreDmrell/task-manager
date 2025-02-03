@@ -30,7 +30,9 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey _addTaskKey = GlobalKey();
   final GlobalKey _dateFilterKey = GlobalKey();
   final GlobalKey _deleteTaskKey = GlobalKey();
+  final GlobalKey _listTasksKey = GlobalKey();
   bool _showShowcase = false;
+  bool _showDeletion = false;
 
   @override
   void initState() {
@@ -46,17 +48,29 @@ class _HomePageState extends State<HomePage> {
 
     final prefs = await SharedPreferences.getInstance();
     _showShowcase = !(prefs.getBool('hasSeenShowcase') ?? false);
+    _showDeletion = !(prefs.getBool('hasSeenDeletion') ?? false);
 
-    if (_showShowcase) {
+    if (_showShowcase || _showDeletion) {
       // Add a small delay to ensure the widget tree is built
       Future.delayed(const Duration(milliseconds: 500), () {
         if (mounted) {
-          ShowCaseWidget.of(context).startShowCase([
+          final state = context.read<TasksCubit>().state;
+          final hasTasksToShow =
+              state is GetTasksSuccess && state.tasks.isNotEmpty;
+
+          final showcaseKeys = [
             _addTaskKey,
             _dateFilterKey,
-            _deleteTaskKey,
-          ]);
-          prefs.setBool('hasSeenShowcase', true);
+            _listTasksKey,
+          ];
+
+          if (hasTasksToShow) {
+            ShowCaseWidget.of(context).startShowCase([_deleteTaskKey]);
+            prefs.setBool('hasSeenDeletion', true);
+          } else {
+            ShowCaseWidget.of(context).startShowCase(showcaseKeys);
+            prefs.setBool('hasSeenShowcase', true);
+          }
         }
       });
     }
@@ -281,7 +295,11 @@ class _HomePageState extends State<HomePage> {
                 ],
               );
             }
-            return const SizedBox();
+            return Showcase(
+              key: _listTasksKey,
+              description: 'You can see your tasks here',
+              child: const SizedBox(),
+            );
           },
         ));
   }

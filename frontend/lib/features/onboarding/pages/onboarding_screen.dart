@@ -6,21 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
 
-  Widget _buildImage(String assetName) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 40.0),
-      child: SvgPicture.asset(
-        'assets/$assetName',
-        width: 250,
-        height: 250,
-        placeholderBuilder: (BuildContext context) => Container(
-          padding: const EdgeInsets.all(30.0),
-          child: const CircularProgressIndicator(),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return IntroductionScreen(
@@ -29,7 +14,7 @@ class OnboardingScreen extends StatelessWidget {
           title: "Welcome to Task Manager",
           body:
               "Stay organized and boost your productivity with our intuitive task management app",
-          image: _buildImage('undraw_welcome-cats_tw36.svg'),
+          image: Image.asset('assets/images/undraw_welcome-cats_tw36.png'),
           decoration: const PageDecoration(
             titleTextStyle:
                 TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
@@ -41,7 +26,7 @@ class OnboardingScreen extends StatelessWidget {
           title: "Create & Organize Tasks",
           body:
               "Easily create new tasks, set due dates, and organize them with custom colors",
-          image: _buildImage('undraw_to-do-list_dzdz.svg'),
+          image: Image.asset('assets/images/undraw_to-do-list_dzdz.png'),
           decoration: const PageDecoration(
             titleTextStyle:
                 TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
@@ -53,7 +38,8 @@ class OnboardingScreen extends StatelessWidget {
           title: "Track Your Progress",
           body:
               "Filter tasks by date and keep track of your daily achievements",
-          image: _buildImage('undraw_progress-indicator_c14b.svg'),
+          image:
+              Image.asset('assets/images/undraw_progress-indicator_c14b.png'),
           decoration: const PageDecoration(
             titleTextStyle:
                 TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
@@ -65,7 +51,7 @@ class OnboardingScreen extends StatelessWidget {
           title: "Sync Across Devices",
           body:
               "Your tasks are automatically synced when you're online, access them anywhere",
-          image: _buildImage('undraw_synchronize_txyw.svg'),
+          image: Image.asset('assets/images/undraw_synchronize_txyw.png'),
           decoration: const PageDecoration(
             titleTextStyle:
                 TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
