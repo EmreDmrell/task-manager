@@ -8,6 +8,8 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return IntroductionScreen(
       pages: [
         PageViewModel(
@@ -15,11 +17,12 @@ class OnboardingScreen extends StatelessWidget {
           body:
               "Stay organized and boost your productivity with our intuitive task management app",
           image: Image.asset('assets/images/undraw_welcome-cats_tw36.png'),
-          decoration: const PageDecoration(
-            titleTextStyle:
-                TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-            bodyTextStyle: TextStyle(fontSize: 18),
-            imagePadding: EdgeInsets.only(top: 40),
+          decoration: PageDecoration(
+            titleTextStyle: textTheme.headlineMedium ??
+                const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+            bodyTextStyle:
+                textTheme.bodyLarge ?? const TextStyle(fontSize: 16.0),
+            imagePadding: const EdgeInsets.only(top: 40),
           ),
         ),
         PageViewModel(
@@ -27,11 +30,12 @@ class OnboardingScreen extends StatelessWidget {
           body:
               "Easily create new tasks, set due dates, and organize them with custom colors",
           image: Image.asset('assets/images/undraw_to-do-list_dzdz.png'),
-          decoration: const PageDecoration(
-            titleTextStyle:
-                TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-            bodyTextStyle: TextStyle(fontSize: 18),
-            imagePadding: EdgeInsets.only(top: 40),
+          decoration: PageDecoration(
+            titleTextStyle: textTheme.headlineMedium ??
+                const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+            bodyTextStyle:
+                textTheme.bodyLarge ?? const TextStyle(fontSize: 16.0),
+            imagePadding: const EdgeInsets.only(top: 40),
           ),
         ),
         PageViewModel(
@@ -40,11 +44,12 @@ class OnboardingScreen extends StatelessWidget {
               "Filter tasks by date and keep track of your daily achievements",
           image:
               Image.asset('assets/images/undraw_progress-indicator_c14b.png'),
-          decoration: const PageDecoration(
-            titleTextStyle:
-                TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-            bodyTextStyle: TextStyle(fontSize: 18),
-            imagePadding: EdgeInsets.only(top: 40),
+          decoration: PageDecoration(
+            titleTextStyle: textTheme.headlineMedium ??
+                const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+            bodyTextStyle:
+                textTheme.bodyLarge ?? const TextStyle(fontSize: 16.0),
+            imagePadding: const EdgeInsets.only(top: 40),
           ),
         ),
         PageViewModel(
@@ -52,26 +57,29 @@ class OnboardingScreen extends StatelessWidget {
           body:
               "Your tasks are automatically synced when you're online, access them anywhere",
           image: Image.asset('assets/images/undraw_synchronize_txyw.png'),
-          decoration: const PageDecoration(
-            titleTextStyle:
-                TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-            bodyTextStyle: TextStyle(fontSize: 18),
-            imagePadding: EdgeInsets.only(top: 40),
+          decoration: PageDecoration(
+            titleTextStyle: textTheme.headlineMedium ??
+                const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+            bodyTextStyle:
+                textTheme.bodyLarge ?? const TextStyle(fontSize: 16.0),
+            imagePadding: const EdgeInsets.only(top: 40),
           ),
         ),
       ],
       showSkipButton: true,
-      skip: const Text("Skip"),
-      next: const Text("Next"),
-      done: const Text("Get Started",
-          style: TextStyle(fontWeight: FontWeight.bold)),
+      skip: Text("Skip", style: textTheme.labelLarge),
+      next: Text("Next", style: textTheme.labelLarge),
+      done: Text(
+        "Get Started",
+        style: textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
+      ),
       onDone: () => _onIntroEnd(context),
       onSkip: () => _onIntroEnd(context),
       dotsDecorator: DotsDecorator(
         size: const Size(10.0, 10.0),
         color: Colors.grey,
         activeSize: const Size(22.0, 10.0),
-        activeColor: Colors.deepOrangeAccent,
+        activeColor: Theme.of(context).primaryColor,
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24.0),
         ),

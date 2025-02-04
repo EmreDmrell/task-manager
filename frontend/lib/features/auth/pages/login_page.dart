@@ -57,13 +57,10 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    'Log In',
-                    style: TextStyle(
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  Text('Log In',
+                      style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                            fontSize: 50,
+                          )),
                   SizedBox(height: 30),
                   TextFormField(
                     controller: emailController,
@@ -96,12 +93,11 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: 15),
                   ElevatedButton(
                     onPressed: loginUser,
-                    child: const Text(
+                    child: Text(
                       'LOGIN',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.white,
+                          ),
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -115,10 +111,12 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           TextSpan(
                             text: 'Sign Up',
-                            style: const TextStyle(
-                              color: Colors.blue,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(
+                                  color: Colors.blue,
+                                ),
                           ),
                         ],
                       ),

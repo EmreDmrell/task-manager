@@ -145,14 +145,14 @@ class _HomePageState extends State<HomePage> {
         drawer: Drawer(
           child: Column(
             children: [
-              const DrawerHeader(
+              DrawerHeader(
                 decoration: BoxDecoration(
                   color: Colors.deepOrangeAccent,
                 ),
                 child: Center(
                   child: Text(
                     'Task App',
-                    style: TextStyle(color: Colors.white, fontSize: 24),
+                    style: Theme.of(context).textTheme.displaySmall,
                   ),
                 ),
               ),
@@ -292,9 +292,8 @@ class _HomePageState extends State<HomePage> {
                                   padding: const EdgeInsets.all(12.0),
                                   child: Text(
                                     DateFormat.jm().format(task.dueAt),
-                                    style: TextStyle(
-                                      fontSize: 17,
-                                    ),
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
                                   ),
                                 ),
                               ],

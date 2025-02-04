@@ -20,13 +20,10 @@ class ThemeSettingsPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Choose Theme',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                Text('Choose Theme',
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                          fontSize: 20,
+                        )),
                 const SizedBox(height: 16),
                 RadioListTile<String>(
                   title: const Text('System Default'),

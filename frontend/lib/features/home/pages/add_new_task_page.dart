@@ -195,13 +195,8 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                   ),
                   ElevatedButton(
                     onPressed: createNewTask,
-                    child: const Text(
-                      'SUBMIT',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                      ),
-                    ),
+                    child: Text('SUBMIT',
+                        style: Theme.of(context).textTheme.bodyLarge),
                   ),
                 ],
               ),

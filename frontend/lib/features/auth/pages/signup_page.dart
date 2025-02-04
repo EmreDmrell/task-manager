@@ -62,13 +62,10 @@ class _SignupPageState extends State<SignupPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'Sign Up',
-                  style: TextStyle(
-                    fontSize: 50,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                Text('Sign Up',
+                    style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                          fontSize: 50,
+                        )),
                 SizedBox(height: 30),
                 TextFormField(
                   controller: nameController,
@@ -117,9 +114,11 @@ class _SignupPageState extends State<SignupPage> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: signUpUser,
-                  child: const Text(
+                  child: Text(
                     'SIGN UP',
-                    style: TextStyle(fontSize: 16, color: Colors.white),
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.white,
+                        ),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -134,10 +133,10 @@ class _SignupPageState extends State<SignupPage> {
                       children: [
                         TextSpan(
                           text: 'Sign In',
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Colors.blue,
+                                  ),
                         ),
                       ],
                     ),
