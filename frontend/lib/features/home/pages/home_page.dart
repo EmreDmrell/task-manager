@@ -4,12 +4,13 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/constants/utils.dart';
-import 'package:frontend/core/services/sp_service.dart';
 import 'package:frontend/features/auth/cubit/auth_cubit.dart';
 import 'package:frontend/features/auth/pages/login_page.dart';
 import 'package:frontend/features/home/cubit/tasks_cubit.dart';
+import 'package:frontend/features/home/pages/add_new_task_page.dart';
 import 'package:frontend/features/home/widgets/date_selector.dart';
 import 'package:frontend/features/home/widgets/task_card.dart';
+import 'package:frontend/features/settings/theme_settings_page.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:showcaseview/showcaseview.dart';
@@ -29,8 +30,8 @@ class _HomePageState extends State<HomePage> {
   StreamSubscription? _connectivitySubscription;
   final GlobalKey _addTaskKey = GlobalKey();
   final GlobalKey _dateFilterKey = GlobalKey();
-  final GlobalKey _deleteTaskKey = GlobalKey();
   final GlobalKey _listTasksKey = GlobalKey();
+  final Map<String, GlobalKey> _deleteTaskKeys = {};
   bool _showShowcase = false;
   bool _showDeletion = false;
 
@@ -65,7 +66,10 @@ class _HomePageState extends State<HomePage> {
           ];
 
           if (hasTasksToShow) {
-            ShowCaseWidget.of(context).startShowCase([_deleteTaskKey]);
+            if (_deleteTaskKeys.isNotEmpty) {
+              ShowCaseWidget.of(context)
+                  .startShowCase([_deleteTaskKeys.values.first]);
+            }
             prefs.setBool('hasSeenDeletion', true);
           } else {
             ShowCaseWidget.of(context).startShowCase(showcaseKeys);
@@ -152,6 +156,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
+              ListTile(
+                leading: const Icon(Icons.palette_outlined),
+                title: const Text('Theme Settings'),
+                onTap: () {
+                  Navigator.pushNamed(context, ThemeSettingsPage.routeName);
+                },
+              ),
               const Spacer(),
               BlocListener<AuthCubit, AuthState>(
                 listener: (context, state) {
@@ -183,7 +194,7 @@ class _HomePageState extends State<HomePage> {
               description: 'Tap here to add a new task',
               child: IconButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/addNewTask');
+                  Navigator.pushNamed(context, AddNewTaskPage.routeName);
                 },
                 icon: const Icon(Icons.add),
               ),
@@ -234,8 +245,9 @@ class _HomePageState extends State<HomePage> {
                       itemCount: tasks.length,
                       itemBuilder: (context, index) {
                         final task = tasks[index];
+                        _deleteTaskKeys.putIfAbsent(task.id, () => GlobalKey());
                         return Showcase(
-                          key: _deleteTaskKey,
+                          key: _deleteTaskKeys[task.id]!,
                           description: 'Slide left to delete task',
                           child: Dismissible(
                             key: Key(task.id),

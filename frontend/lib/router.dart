@@ -3,6 +3,7 @@ import 'package:frontend/features/auth/pages/login_page.dart';
 import 'package:frontend/features/auth/pages/signup_page.dart';
 import 'package:frontend/features/home/pages/add_new_task_page.dart';
 import 'package:frontend/features/home/pages/home_page.dart';
+import 'package:frontend/features/settings/theme_settings_page.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -21,6 +22,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case AddNewTaskPage.routeName:
       return MaterialPageRoute(
         builder: (_) => const AddNewTaskPage(),
+      );
+    case ThemeSettingsPage.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const ThemeSettingsPage(),
       );
     default:
       return MaterialPageRoute(

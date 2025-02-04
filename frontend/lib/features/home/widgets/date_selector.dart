@@ -17,6 +17,17 @@ class DateSelector extends StatefulWidget {
 
 class _DateSelectorState extends State<DateSelector> {
   int weekOffset = 0;
+  Key listViewKey = UniqueKey();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Trigger a rebuild when dependencies change (e.g., theme change)
+    setState(() {
+      listViewKey = UniqueKey();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final weekDates = generateWeekDates(weekOffset);
@@ -40,10 +51,9 @@ class _DateSelectorState extends State<DateSelector> {
               ),
               Text(
                 monthName,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               IconButton(
                 onPressed: () {
@@ -61,6 +71,7 @@ class _DateSelectorState extends State<DateSelector> {
           child: SizedBox(
             height: 80,
             child: ListView.builder(
+              key: listViewKey,
               scrollDirection: Axis.horizontal,
               itemCount: weekDates.length,
               itemBuilder: (context, index) {
@@ -89,22 +100,32 @@ class _DateSelectorState extends State<DateSelector> {
                       children: [
                         Text(
                           DateFormat("d").format(date),
-                          style: TextStyle(
-                            color: isSelected ? Colors.white : Colors.black87,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    color: isSelected
+                                        ? Colors.white
+                                        : Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge
+                                            ?.color,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
                         const SizedBox(
                           height: 5,
                         ),
                         Text(
                           DateFormat("E").format(date),
-                          style: TextStyle(
-                            color: isSelected ? Colors.white : Colors.black87,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: isSelected
+                                        ? Colors.white
+                                        : Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium
+                                            ?.color,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
                       ],
                     ),
