@@ -3,8 +3,6 @@
 <h1>Task Management Application</h1>
 <p>A modern task management application built with Flutter for the frontend and includes a backend server. This application helps users organize and track their tasks efficiently.</p>
 
-
-
 </div>
 
 # :notebook_with_decorative_cover: Table of Contents
@@ -12,9 +10,10 @@
 - [About the Project](#star2-about-the-project)
 - [Contributing](#wave-contributing)
 
-
 ## :star2: About the Project
+
 ### :space_invader: Tech Stack
+
 <details> <summary>Frontend</summary> <ul>
   <li><img src="https://img.shields.io/badge/Flutter-3.6%2B-blue"></li>
   <li><img src="https://img.shields.io/badge/State%20Management-Flutter%20Bloc-blue"></li>
@@ -31,7 +30,6 @@
   <li><img src="https://img.shields.io/badge/Database-PostgreSQL-white"></li>
 </ul> </details>
 
-
 ### :dart: Features
 
 ### User Authentication
@@ -41,16 +39,40 @@
 - Secure token-based authentication
 - Persistent login state
 
-### Task Management
+#### Task Management
 
-- Create new tasks
-- Set task due dates
-- Customize task colors
-- Add task descriptions
-- View task details
-- Local data persistence
-- Real-time synchronization with backend
-  
+- Create tasks with title and description
+- Set custom colors for tasks
+- Schedule tasks with due dates
+- Delete tasks with swipe gesture
+- Filter tasks by date
+- Real-time task updates
+- Local storage with SQLite
+- Offline support
+
+#### User Interface
+
+- Interactive task showcases for new users
+- Date selector for filtering tasks
+- Task cards with color coding
+- Intuitive swipe-to-delete functionality
+- Loading states and error handling
+- Form validation for task creation
+
+#### Synchronization
+
+- Backend API integration
+- Automatic sync when online
+- Local data persistence when offline
+- Network status monitoring
+
+#### User Experience
+
+- First-time user guidance with showcases
+- Visual feedback for actions
+- Persistent app state
+- Smooth animations and transitions
+
 ## :toolbox: Getting Started
 
 ### :bangbang: Prerequisites
@@ -59,8 +81,9 @@
 - Dart SDK
 - Node.js
 - Docker (for backend)
-  
+
 ### :key: Environment Variables
+
 To run this project, you will need to add the following environment variables to your .env file
 
 `DATABASE_URL`
@@ -72,34 +95,40 @@ To run this project, you will need to add the following environment variables to
 `POSTGRES_DB`
 `JWT_KEY`
 
-
 ### :gear: Installation
 
 Clone the repository
+
 ```bash
-git clone https://github.com/EmreDmrell/task-manager.git 
+git clone https://github.com/EmreDmrell/task-manager.git
 ```
+
 Frontend Setup:
+
 ```bash
-cd frontend 
+cd frontend
 flutter pub get
 ```
+
 Backend Setup:
+
 ```bash
 cd backend
 npm install
 ```
 
-
 ### :running: Run Locally
 
 Run the application
+
 ```bash
 # Start backend server
 cd backend
 docker-compose up
 ```
+
 Run frontend application
+
 ```bash
 # Run frontend application
 cd frontend
@@ -126,17 +155,17 @@ task_app/
 
 1. Fork the repository
 2. Create your feature branch:
-    ```bash
-    git checkout -b feature/AmazingFeature
-    ```
+   ```bash
+   git checkout -b feature/AmazingFeature
+   ```
 3. Commit your changes:
-    ```bash
-    git commit -m 'Add some AmazingFeature'
-    ```
+   ```bash
+   git commit -m 'Add some AmazingFeature'
+   ```
 4. Push to the branch:
-    ```bash
-    git push origin feature/AmazingFeature
-    ```
+   ```bash
+   git push origin feature/AmazingFeature
+   ```
 5. Open a Pull Request
-   
+
 Contributions are always welcome!
