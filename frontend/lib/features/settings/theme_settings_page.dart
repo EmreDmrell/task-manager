@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/generated/l10n.dart';
 import 'package:provider/provider.dart';
 import 'package:frontend/core/theme/theme_provider.dart';
 
@@ -11,7 +12,7 @@ class ThemeSettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Theme Settings'),
+        title: Text(S.current.themeSettings),
       ),
       body: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) {
@@ -20,13 +21,13 @@ class ThemeSettingsPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Choose Theme',
+                Text(S.current.chooseTheme,
                     style: Theme.of(context).textTheme.displaySmall?.copyWith(
                           fontSize: 20,
                         )),
                 const SizedBox(height: 16),
                 RadioListTile<String>(
-                  title: const Text('System Default'),
+                  title: Text(S.current.systemDefault),
                   value: 'system',
                   groupValue: themeProvider.themeMode == ThemeMode.system
                       ? 'system'
@@ -36,7 +37,7 @@ class ThemeSettingsPage extends StatelessWidget {
                   onChanged: (value) => themeProvider.setThemeMode(value!),
                 ),
                 RadioListTile<String>(
-                  title: const Text('Light Mode'),
+                  title: Text(S.current.lightMode),
                   value: 'light',
                   groupValue: themeProvider.themeMode == ThemeMode.system
                       ? 'system'
@@ -46,7 +47,7 @@ class ThemeSettingsPage extends StatelessWidget {
                   onChanged: (value) => themeProvider.setThemeMode(value!),
                 ),
                 RadioListTile<String>(
-                  title: const Text('Dark Mode'),
+                  title: Text(S.current.darkMode),
                   value: 'dark',
                   groupValue: themeProvider.themeMode == ThemeMode.system
                       ? 'system'

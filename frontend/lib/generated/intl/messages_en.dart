@@ -37,6 +37,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "appTitle": MessageLookupByLibrary.simpleMessage("Task App"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "chooseLanguage": MessageLookupByLibrary.simpleMessage("Choose Language"),
+    "chooseTheme": MessageLookupByLibrary.simpleMessage("Choose Theme"),
     "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
     "deleteTask": MessageLookupByLibrary.simpleMessage("Delete Task"),
     "deleteTaskShowcase": MessageLookupByLibrary.simpleMessage(
@@ -66,29 +68,26 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalidEmail": MessageLookupByLibrary.simpleMessage(
       "Email field is invalid",
     ),
+    "languageSettings": MessageLookupByLibrary.simpleMessage(
+      "Language Settings",
+    ),
     "lightMode": MessageLookupByLibrary.simpleMessage("Light Mode"),
     "listTaskShowcase": MessageLookupByLibrary.simpleMessage(
       "You can see your tasks here",
     ),
     "logIn": MessageLookupByLibrary.simpleMessage("Log In"),
     "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
+    "manageTaskDesc": MessageLookupByLibrary.simpleMessage(
+      "Easily create new tasks, set due dates, and organize them with custom colors",
+    ),
+    "manageTaskTitle": MessageLookupByLibrary.simpleMessage(
+      "Create & Organize Tasks",
+    ),
     "name": MessageLookupByLibrary.simpleMessage("Name"),
     "nameFieldEmpty": MessageLookupByLibrary.simpleMessage(
       "Email field cannot be empty",
     ),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
-    "onboardingDesc1": MessageLookupByLibrary.simpleMessage(
-      "Create and manage your daily tasks efficiently",
-    ),
-    "onboardingDesc2": MessageLookupByLibrary.simpleMessage(
-      "Keep track of your progress and achievements",
-    ),
-    "onboardingDesc3": MessageLookupByLibrary.simpleMessage(
-      "Stay organized and boost your productivity",
-    ),
-    "onboardingTitle1": MessageLookupByLibrary.simpleMessage("Manage Tasks"),
-    "onboardingTitle2": MessageLookupByLibrary.simpleMessage("Track Progress"),
-    "onboardingTitle3": MessageLookupByLibrary.simpleMessage("Stay Organized"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "passwordFieldEmpty": MessageLookupByLibrary.simpleMessage(
       "Password field cannot be empty",
@@ -111,14 +110,34 @@ class MessageLookup extends MessageLookupByLibrary {
     "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+    "stayOrganizedDesc": MessageLookupByLibrary.simpleMessage(
+      "Stay organized and boost your productivity with our intuitive task management app",
+    ),
+    "stayOrganizedTitle": MessageLookupByLibrary.simpleMessage(
+      "Stay Organized",
+    ),
+    "syncTaskDesc": MessageLookupByLibrary.simpleMessage(
+      "Your tasks are automatically synced when you\'re online, access them anywhere",
+    ),
     "syncTaskError": MessageLookupByLibrary.simpleMessage(
       "Failed to sync tasks",
     ),
+    "syncTaskTitle": MessageLookupByLibrary.simpleMessage(
+      "Sync Across Devices",
+    ),
+    "systemDefault": MessageLookupByLibrary.simpleMessage("System Default"),
     "taskDescription": MessageLookupByLibrary.simpleMessage("Task Description"),
     "taskTitle": MessageLookupByLibrary.simpleMessage("Task Title"),
     "tasks": MessageLookupByLibrary.simpleMessage("My Tasks"),
     "themeSettings": MessageLookupByLibrary.simpleMessage("ThemeSettings"),
     "title": MessageLookupByLibrary.simpleMessage("Title"),
     "titleEmpty": MessageLookupByLibrary.simpleMessage("Title cannot be empty"),
+    "trackProggressDesc": MessageLookupByLibrary.simpleMessage(
+      "Filter tasks by date and keep track of your daily achievements",
+    ),
+    "trackProggressTitle": MessageLookupByLibrary.simpleMessage(
+      "Track Your Progress",
+    ),
+    "welcome": MessageLookupByLibrary.simpleMessage("Welcome to Task Manager"),
   };
 }

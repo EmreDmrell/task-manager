@@ -180,6 +180,16 @@ class S {
     return Intl.message('Settings', name: 'settings', desc: '', args: []);
   }
 
+  /// `Language Settings`
+  String get languageSettings {
+    return Intl.message(
+      'Language Settings',
+      name: 'languageSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `ThemeSettings`
   String get themeSettings {
     return Intl.message(
@@ -190,11 +200,31 @@ class S {
     );
   }
 
-  /// `Failed to sync tasks`
-  String get syncTaskError {
+  /// `Choose Theme`
+  String get chooseTheme {
     return Intl.message(
-      'Failed to sync tasks',
-      name: 'syncTaskError',
+      'Choose Theme',
+      name: 'chooseTheme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose Language`
+  String get chooseLanguage {
+    return Intl.message(
+      'Choose Language',
+      name: 'chooseLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `System Default`
+  String get systemDefault {
+    return Intl.message(
+      'System Default',
+      name: 'systemDefault',
       desc: '',
       args: [],
     );
@@ -208,6 +238,16 @@ class S {
   /// `Light Mode`
   String get lightMode {
     return Intl.message('Light Mode', name: 'lightMode', desc: '', args: []);
+  }
+
+  /// `Failed to sync tasks`
+  String get syncTaskError {
+    return Intl.message(
+      'Failed to sync tasks',
+      name: 'syncTaskError',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `Add New Task`
@@ -320,6 +360,16 @@ class S {
     return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
   }
 
+  /// `Welcome to Task Manager`
+  String get welcome {
+    return Intl.message(
+      'Welcome to Task Manager',
+      name: 'welcome',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Get Started`
   String get getStarted {
     return Intl.message('Get Started', name: 'getStarted', desc: '', args: []);
@@ -340,61 +390,81 @@ class S {
     return Intl.message('Done', name: 'done', desc: '', args: []);
   }
 
-  /// `Manage Tasks`
-  String get onboardingTitle1 {
+  /// `Create & Organize Tasks`
+  String get manageTaskTitle {
     return Intl.message(
-      'Manage Tasks',
-      name: 'onboardingTitle1',
+      'Create & Organize Tasks',
+      name: 'manageTaskTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Track Progress`
-  String get onboardingTitle2 {
+  /// `Track Your Progress`
+  String get trackProggressTitle {
     return Intl.message(
-      'Track Progress',
-      name: 'onboardingTitle2',
+      'Track Your Progress',
+      name: 'trackProggressTitle',
       desc: '',
       args: [],
     );
   }
 
   /// `Stay Organized`
-  String get onboardingTitle3 {
+  String get stayOrganizedTitle {
     return Intl.message(
       'Stay Organized',
-      name: 'onboardingTitle3',
+      name: 'stayOrganizedTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Create and manage your daily tasks efficiently`
-  String get onboardingDesc1 {
+  /// `Easily create new tasks, set due dates, and organize them with custom colors`
+  String get manageTaskDesc {
     return Intl.message(
-      'Create and manage your daily tasks efficiently',
-      name: 'onboardingDesc1',
+      'Easily create new tasks, set due dates, and organize them with custom colors',
+      name: 'manageTaskDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `Keep track of your progress and achievements`
-  String get onboardingDesc2 {
+  /// `Filter tasks by date and keep track of your daily achievements`
+  String get trackProggressDesc {
     return Intl.message(
-      'Keep track of your progress and achievements',
-      name: 'onboardingDesc2',
+      'Filter tasks by date and keep track of your daily achievements',
+      name: 'trackProggressDesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `Stay organized and boost your productivity`
-  String get onboardingDesc3 {
+  /// `Stay organized and boost your productivity with our intuitive task management app`
+  String get stayOrganizedDesc {
     return Intl.message(
-      'Stay organized and boost your productivity',
-      name: 'onboardingDesc3',
+      'Stay organized and boost your productivity with our intuitive task management app',
+      name: 'stayOrganizedDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sync Across Devices`
+  String get syncTaskTitle {
+    return Intl.message(
+      'Sync Across Devices',
+      name: 'syncTaskTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your tasks are automatically synced when you're online, access them anywhere`
+  String get syncTaskDesc {
+    return Intl.message(
+      'Your tasks are automatically synced when you\'re online, access them anywhere',
+      name: 'syncTaskDesc',
       desc: '',
       args: [],
     );

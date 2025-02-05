@@ -22,12 +22,15 @@
   "tasks": "Görevlerim",
   "settings": "Ayarlar",
   "themeSettings": "Tema Ayarları",
+  "languageSettings": "Dil Ayarları",
 
 
   "syncTaskError": "Görevler senkronize edilemedi",
   
+  "chooseTheme": "Tema Seç",
+  "chooseLanguage" : "Dil Seç",
 
-
+  "systemDefault": "Sistem Varsayılanı",
   "darkMode": "Karanlık Mod",
   "lightMode": "Aydınlık Mod",
 
@@ -53,17 +56,19 @@
   "save": "Kaydet",
   "cancel": "İptal",
 
-
+  "welcome": "Görev Yöneticisine Hoş Geldiniz",
   "getStarted": "Başla",
   "next": "İleri",
   "skip": "Atla",
   "done": "Tamam",
-  "onboardingTitle1": "Görevleri Yönet",
-  "onboardingTitle2": "İlerlemeyi Takip Et",
-  "onboardingTitle3": "Düzenli Kal",
-  "onboardingDesc1": "Günlük görevlerini verimli bir şekilde oluştur ve yönet",
-  "onboardingDesc2": "İlerlemeni ve başarılarını takip et",
-  "onboardingDesc3": "Düzenli kal ve üretkenliğini artır",
+  "manageTaskTitle": "Görevleri Oluştur & Düzenle",
+  "trackProggressTitle": "İlerlemeni Takip Et",
+  "stayOrganizedTitle": "Düzenli Kal",
+  "manageTaskDesc": "Kolayca yeni görevler oluştur, bitiş tarihleri belirle ve özel renklerle düzenle",
+  "trackProggressDesc": "Görevleri tarihe göre filtrele ve günlük başarılarını takip et",
+  "stayOrganizedDesc": "Sezgisel görev yönetimi uygulamamızla düzenli kal ve üretkenliğini artır",
+  "syncTaskTitle": "Cihazlar Arası Senkronizasyon",
+  "syncTaskDesc": "Çevrimiçi olduğunuzda görevleriniz otomatik olarak senkronize edilir, her yerden erişin",
 
   "selectDueDateShowcase": "Bitiş tarihini seçmek için dokun",
   "enterTaskTitleShowcase": "Görev başlığını buraya girin",

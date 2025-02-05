@@ -3,6 +3,7 @@ import 'package:frontend/features/auth/pages/login_page.dart';
 import 'package:frontend/features/auth/pages/signup_page.dart';
 import 'package:frontend/features/home/pages/add_new_task_page.dart';
 import 'package:frontend/features/home/pages/home_page.dart';
+import 'package:frontend/features/settings/language_settings_page.dart';
 import 'package:frontend/features/settings/theme_settings_page.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -26,6 +27,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case ThemeSettingsPage.routeName:
       return MaterialPageRoute(
         builder: (_) => const ThemeSettingsPage(),
+      );
+    case LanguageSettingsPage.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const LanguageSettingsPage(),
       );
     default:
       return MaterialPageRoute(

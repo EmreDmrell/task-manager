@@ -23,12 +23,15 @@
   "tasks": "Mis Tareas",
   "settings": "Ajustes",
   "themeSettings": "Ajustes de Tema",
+  "languageSettings": "Ajustes de Idioma",
 
 
   "syncTaskError": "Error al sincronizar las tareas",
   
+  "chooseTheme": "Elegir Tema",
+  "chooseLanguage" : "Elegir Idioma",
 
-  
+  "systemDefault": "Predeterminado del sistema",
   "darkMode": "Modo Oscuro",
   "lightMode": "Modo Claro",
 
@@ -55,17 +58,19 @@
   "save": "Guardar",
   "cancel": "Cancelar",
 
-
+  "welcome": "Bienvenido al Gestor de Tareas",
   "getStarted": "Comenzar",
   "next": "Siguiente",
   "skip": "Saltar",
   "done": "Listo",
-  "onboardingTitle1": "Gestionar Tareas",
-  "onboardingTitle2": "Seguir Progreso",
-  "onboardingTitle3": "Mantenerse Organizado",
-  "onboardingDesc1": "Crea y gestiona tus tareas diarias de manera eficiente",
-  "onboardingDesc2": "Realiza un seguimiento de tu progreso y logros",
-  "onboardingDesc3": "Mantente organizado y aumenta tu productividad",
+  "manageTaskTitle": "Crear y Organizar Tareas",
+  "trackProggressTitle": "Sigue Tu Progreso",
+  "stayOrganizedTitle": "Mantente Organizado",
+  "manageTaskDesc": "Crea fácilmente nuevas tareas, establece fechas de vencimiento y organízalas con colores personalizados",
+  "trackProggressDesc": "Filtra tareas por fecha y mantén un registro de tus logros diarios",
+  "stayOrganizedDesc": "Mantente organizado y aumenta tu productividad con nuestra intuitiva aplicación de gestión de tareas",
+  "syncTaskTitle": "Sincronización Entre Dispositivos",
+  "syncTaskDesc": "Tus tareas se sincronizan automáticamente cuando estás en línea, accede a ellas desde cualquier lugar",
 
 
   "selectDueDateShowcase": "Toca aquí para seleccionar la fecha de vencimiento",

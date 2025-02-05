@@ -197,7 +197,9 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                   ElevatedButton(
                     onPressed: createNewTask,
                     child: Text(S.current.save.toUpperCase(),
-                        style: Theme.of(context).textTheme.bodyLarge),
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: Colors.white,
+                            )),
                   ),
                 ],
               ),

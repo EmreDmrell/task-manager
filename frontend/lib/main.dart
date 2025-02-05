@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/core/language/language_providert.dart';
 import 'package:frontend/core/theme/app_theme.dart';
 import 'package:frontend/features/auth/cubit/auth_cubit.dart';
 import 'package:frontend/features/auth/pages/login_page.dart';
@@ -19,6 +20,7 @@ void main() {
     builder: (context) => MultiBlocProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => LanguageProvider()),
         BlocProvider(create: (_) => AuthCubit()),
         BlocProvider(create: (_) => TasksCubit()),
       ],
@@ -67,7 +69,7 @@ class _MyAppState extends State<MyApp> {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      locale: const Locale('es'),
+      locale: context.watch<LanguageProvider>().locale,
       title: 'Task App',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,

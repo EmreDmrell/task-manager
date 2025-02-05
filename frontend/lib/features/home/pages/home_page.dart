@@ -10,6 +10,7 @@ import 'package:frontend/features/home/cubit/tasks_cubit.dart';
 import 'package:frontend/features/home/pages/add_new_task_page.dart';
 import 'package:frontend/features/home/widgets/date_selector.dart';
 import 'package:frontend/features/home/widgets/task_card.dart';
+import 'package:frontend/features/settings/language_settings_page.dart';
 import 'package:frontend/features/settings/theme_settings_page.dart';
 import 'package:frontend/generated/l10n.dart';
 import 'package:intl/intl.dart';
@@ -163,6 +164,13 @@ class _HomePageState extends State<HomePage> {
                 title: Text(S.current.themeSettings),
                 onTap: () {
                   Navigator.pushNamed(context, ThemeSettingsPage.routeName);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.language),
+                title: Text(S.current.languageSettings),
+                onTap: () {
+                  Navigator.pushNamed(context, LanguageSettingsPage.routeName);
                 },
               ),
               const Spacer(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/features/auth/pages/login_page.dart';
+import 'package:frontend/generated/l10n.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,9 +14,8 @@ class OnboardingScreen extends StatelessWidget {
     return IntroductionScreen(
       pages: [
         PageViewModel(
-          title: "Welcome to Task Manager",
-          body:
-              "Stay organized and boost your productivity with our intuitive task management app",
+          title: S.current.welcome,
+          body: S.current.stayOrganizedDesc,
           image: Image.asset('assets/images/undraw_welcome-cats_tw36.png'),
           decoration: PageDecoration(
             titleTextStyle: textTheme.headlineMedium ??
@@ -26,9 +26,8 @@ class OnboardingScreen extends StatelessWidget {
           ),
         ),
         PageViewModel(
-          title: "Create & Organize Tasks",
-          body:
-              "Easily create new tasks, set due dates, and organize them with custom colors",
+          title: S.current.manageTaskTitle,
+          body: S.current.manageTaskDesc,
           image: Image.asset('assets/images/undraw_to-do-list_dzdz.png'),
           decoration: PageDecoration(
             titleTextStyle: textTheme.headlineMedium ??
@@ -39,9 +38,8 @@ class OnboardingScreen extends StatelessWidget {
           ),
         ),
         PageViewModel(
-          title: "Track Your Progress",
-          body:
-              "Filter tasks by date and keep track of your daily achievements",
+          title: S.current.trackProggressTitle,
+          body: S.current.trackProggressDesc,
           image:
               Image.asset('assets/images/undraw_progress-indicator_c14b.png'),
           decoration: PageDecoration(
@@ -53,9 +51,8 @@ class OnboardingScreen extends StatelessWidget {
           ),
         ),
         PageViewModel(
-          title: "Sync Across Devices",
-          body:
-              "Your tasks are automatically synced when you're online, access them anywhere",
+          title: S.current.syncTaskTitle,
+          body: S.current.syncTaskDesc,
           image: Image.asset('assets/images/undraw_synchronize_txyw.png'),
           decoration: PageDecoration(
             titleTextStyle: textTheme.headlineMedium ??
@@ -67,10 +64,10 @@ class OnboardingScreen extends StatelessWidget {
         ),
       ],
       showSkipButton: true,
-      skip: Text("Skip", style: textTheme.labelLarge),
-      next: Text("Next", style: textTheme.labelLarge),
+      skip: Text(S.current.skip, style: textTheme.labelLarge),
+      next: Text(S.current.next, style: textTheme.labelLarge),
       done: Text(
-        "Get Started",
+        S.current.getStarted,
         style: textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
       ),
       onDone: () => _onIntroEnd(context),

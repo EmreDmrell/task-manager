@@ -37,6 +37,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "appTitle": MessageLookupByLibrary.simpleMessage("Görev Uygulaması"),
     "cancel": MessageLookupByLibrary.simpleMessage("İptal"),
+    "chooseLanguage": MessageLookupByLibrary.simpleMessage("Dil Seç"),
+    "chooseTheme": MessageLookupByLibrary.simpleMessage("Tema Seç"),
     "darkMode": MessageLookupByLibrary.simpleMessage("Karanlık Mod"),
     "deleteTask": MessageLookupByLibrary.simpleMessage("Görevi Sil"),
     "deleteTaskShowcase": MessageLookupByLibrary.simpleMessage(
@@ -66,31 +68,24 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalidEmail": MessageLookupByLibrary.simpleMessage(
       "Email alanı geçersiz",
     ),
+    "languageSettings": MessageLookupByLibrary.simpleMessage("Dil Ayarları"),
     "lightMode": MessageLookupByLibrary.simpleMessage("Aydınlık Mod"),
     "listTaskShowcase": MessageLookupByLibrary.simpleMessage(
       "Görevlerinizi burada görebilirsiniz",
     ),
     "logIn": MessageLookupByLibrary.simpleMessage("Giriş Yap"),
     "logOut": MessageLookupByLibrary.simpleMessage("Çıkış Yap"),
+    "manageTaskDesc": MessageLookupByLibrary.simpleMessage(
+      "Kolayca yeni görevler oluştur, bitiş tarihleri belirle ve özel renklerle düzenle",
+    ),
+    "manageTaskTitle": MessageLookupByLibrary.simpleMessage(
+      "Görevleri Oluştur & Düzenle",
+    ),
     "name": MessageLookupByLibrary.simpleMessage("İsim"),
     "nameFieldEmpty": MessageLookupByLibrary.simpleMessage(
       "İsim alanı boş bırakılamaz",
     ),
     "next": MessageLookupByLibrary.simpleMessage("İleri"),
-    "onboardingDesc1": MessageLookupByLibrary.simpleMessage(
-      "Günlük görevlerini verimli bir şekilde oluştur ve yönet",
-    ),
-    "onboardingDesc2": MessageLookupByLibrary.simpleMessage(
-      "İlerlemeni ve başarılarını takip et",
-    ),
-    "onboardingDesc3": MessageLookupByLibrary.simpleMessage(
-      "Düzenli kal ve üretkenliğini artır",
-    ),
-    "onboardingTitle1": MessageLookupByLibrary.simpleMessage("Görevleri Yönet"),
-    "onboardingTitle2": MessageLookupByLibrary.simpleMessage(
-      "İlerlemeyi Takip Et",
-    ),
-    "onboardingTitle3": MessageLookupByLibrary.simpleMessage("Düzenli Kal"),
     "password": MessageLookupByLibrary.simpleMessage("Şifre"),
     "passwordFieldEmpty": MessageLookupByLibrary.simpleMessage(
       "Şifre alanı boş bırakılamaz",
@@ -111,9 +106,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "signIn": MessageLookupByLibrary.simpleMessage("Giriş Yap"),
     "signUp": MessageLookupByLibrary.simpleMessage("Kayıt Ol"),
     "skip": MessageLookupByLibrary.simpleMessage("Atla"),
+    "stayOrganizedDesc": MessageLookupByLibrary.simpleMessage(
+      "Sezgisel görev yönetimi uygulamamızla düzenli kal ve üretkenliğini artır",
+    ),
+    "stayOrganizedTitle": MessageLookupByLibrary.simpleMessage("Düzenli Kal"),
+    "syncTaskDesc": MessageLookupByLibrary.simpleMessage(
+      "Çevrimiçi olduğunuzda görevleriniz otomatik olarak senkronize edilir, her yerden erişin",
+    ),
     "syncTaskError": MessageLookupByLibrary.simpleMessage(
       "Görevler senkronize edilemedi",
     ),
+    "syncTaskTitle": MessageLookupByLibrary.simpleMessage(
+      "Cihazlar Arası Senkronizasyon",
+    ),
+    "systemDefault": MessageLookupByLibrary.simpleMessage("Sistem Varsayılanı"),
     "taskDescription": MessageLookupByLibrary.simpleMessage("Görev Açıklaması"),
     "taskTitle": MessageLookupByLibrary.simpleMessage("Görev Başlığı"),
     "tasks": MessageLookupByLibrary.simpleMessage("Görevlerim"),
@@ -121,6 +127,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "title": MessageLookupByLibrary.simpleMessage("Başlık"),
     "titleEmpty": MessageLookupByLibrary.simpleMessage(
       "Başlık boş bırakılamaz",
+    ),
+    "trackProggressDesc": MessageLookupByLibrary.simpleMessage(
+      "Görevleri tarihe göre filtrele ve günlük başarılarını takip et",
+    ),
+    "trackProggressTitle": MessageLookupByLibrary.simpleMessage(
+      "İlerlemeni Takip Et",
+    ),
+    "welcome": MessageLookupByLibrary.simpleMessage(
+      "Görev Yöneticisine Hoş Geldiniz",
     ),
   };
 }

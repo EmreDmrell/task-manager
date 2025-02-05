@@ -22,16 +22,24 @@
 
     "home": "Home",
     "tasks": "My Tasks",
-    "settings": "Settings",
-    "themeSettings": "ThemeSettings",
 
-    "syncTaskError": "Failed to sync tasks",
+
+    "settings": "Settings",
+    "languageSettings": "Language Settings",
+    "themeSettings": "ThemeSettings",
 
     
 
+    
+    "chooseTheme": "Choose Theme",
+    "chooseLanguage" : "Choose Language",
 
+    "systemDefault" : "System Default",
     "darkMode": "Dark Mode",
     "lightMode": "Light Mode",
+
+
+    "syncTaskError": "Failed to sync tasks",
 
 
     "addTask": "Add New Task",
@@ -52,17 +60,19 @@
     "save": "Save",
     "cancel": "Cancel",
 
-
+    "welcome": "Welcome to Task Manager",
     "getStarted": "Get Started",
     "next": "Next",
     "skip": "Skip",
     "done": "Done",
-    "onboardingTitle1": "Manage Tasks",
-    "onboardingTitle2": "Track Progress",
-    "onboardingTitle3": "Stay Organized",
-    "onboardingDesc1": "Create and manage your daily tasks efficiently",
-    "onboardingDesc2": "Keep track of your progress and achievements",
-    "onboardingDesc3": "Stay organized and boost your productivity",
+    "manageTaskTitle": "Create & Organize Tasks",
+    "trackProggressTitle": "Track Your Progress",
+    "stayOrganizedTitle": "Stay Organized",
+    "manageTaskDesc": "Easily create new tasks, set due dates, and organize them with custom colors",
+    "trackProggressDesc": "Filter tasks by date and keep track of your daily achievements",
+    "stayOrganizedDesc": "Stay organized and boost your productivity with our intuitive task management app",
+    "syncTaskTitle": "Sync Across Devices",
+    "syncTaskDesc": "Your tasks are automatically synced when you're online, access them anywhere",
 
     "selectDueDateShowcase" : "Tap here to select due date",
     "enterTaskTitleShowcase": "Enter your task title here",

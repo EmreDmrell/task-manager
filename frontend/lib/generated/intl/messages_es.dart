@@ -37,6 +37,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "appTitle": MessageLookupByLibrary.simpleMessage("Aplicación de Tareas"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancelar"),
+    "chooseLanguage": MessageLookupByLibrary.simpleMessage("Elegir Idioma"),
+    "chooseTheme": MessageLookupByLibrary.simpleMessage("Elegir Tema"),
     "darkMode": MessageLookupByLibrary.simpleMessage("Modo Oscuro"),
     "deleteTask": MessageLookupByLibrary.simpleMessage("Eliminar Tarea"),
     "deleteTaskShowcase": MessageLookupByLibrary.simpleMessage(
@@ -66,33 +68,26 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalidEmail": MessageLookupByLibrary.simpleMessage(
       "El campo de correo electrónico no es válido",
     ),
+    "languageSettings": MessageLookupByLibrary.simpleMessage(
+      "Ajustes de Idioma",
+    ),
     "lightMode": MessageLookupByLibrary.simpleMessage("Modo Claro"),
     "listTaskShowcase": MessageLookupByLibrary.simpleMessage(
       "Puedes ver tus tareas aquí",
     ),
     "logIn": MessageLookupByLibrary.simpleMessage("Iniciar Sesión"),
     "logOut": MessageLookupByLibrary.simpleMessage("Cerrar Sesión"),
+    "manageTaskDesc": MessageLookupByLibrary.simpleMessage(
+      "Crea fácilmente nuevas tareas, establece fechas de vencimiento y organízalas con colores personalizados",
+    ),
+    "manageTaskTitle": MessageLookupByLibrary.simpleMessage(
+      "Crear y Organizar Tareas",
+    ),
     "name": MessageLookupByLibrary.simpleMessage("Nombre"),
     "nameFieldEmpty": MessageLookupByLibrary.simpleMessage(
       "El campo de nombre no puede estar vacío",
     ),
     "next": MessageLookupByLibrary.simpleMessage("Siguiente"),
-    "onboardingDesc1": MessageLookupByLibrary.simpleMessage(
-      "Crea y gestiona tus tareas diarias de manera eficiente",
-    ),
-    "onboardingDesc2": MessageLookupByLibrary.simpleMessage(
-      "Realiza un seguimiento de tu progreso y logros",
-    ),
-    "onboardingDesc3": MessageLookupByLibrary.simpleMessage(
-      "Mantente organizado y aumenta tu productividad",
-    ),
-    "onboardingTitle1": MessageLookupByLibrary.simpleMessage(
-      "Gestionar Tareas",
-    ),
-    "onboardingTitle2": MessageLookupByLibrary.simpleMessage("Seguir Progreso"),
-    "onboardingTitle3": MessageLookupByLibrary.simpleMessage(
-      "Mantenerse Organizado",
-    ),
     "password": MessageLookupByLibrary.simpleMessage("Contraseña"),
     "passwordFieldEmpty": MessageLookupByLibrary.simpleMessage(
       "El campo de contraseña no puede estar vacío",
@@ -115,8 +110,23 @@ class MessageLookup extends MessageLookupByLibrary {
     "signIn": MessageLookupByLibrary.simpleMessage("Iniciar Sesión"),
     "signUp": MessageLookupByLibrary.simpleMessage("Registrarse"),
     "skip": MessageLookupByLibrary.simpleMessage("Saltar"),
+    "stayOrganizedDesc": MessageLookupByLibrary.simpleMessage(
+      "Mantente organizado y aumenta tu productividad con nuestra intuitiva aplicación de gestión de tareas",
+    ),
+    "stayOrganizedTitle": MessageLookupByLibrary.simpleMessage(
+      "Mantente Organizado",
+    ),
+    "syncTaskDesc": MessageLookupByLibrary.simpleMessage(
+      "Tus tareas se sincronizan automáticamente cuando estás en línea, accede a ellas desde cualquier lugar",
+    ),
     "syncTaskError": MessageLookupByLibrary.simpleMessage(
       "Error al sincronizar las tareas",
+    ),
+    "syncTaskTitle": MessageLookupByLibrary.simpleMessage(
+      "Sincronización Entre Dispositivos",
+    ),
+    "systemDefault": MessageLookupByLibrary.simpleMessage(
+      "Predeterminado del sistema",
     ),
     "taskDescription": MessageLookupByLibrary.simpleMessage(
       "Descripción de la Tarea",
@@ -127,6 +137,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "title": MessageLookupByLibrary.simpleMessage("Título"),
     "titleEmpty": MessageLookupByLibrary.simpleMessage(
       "El título no puede estar vacío",
+    ),
+    "trackProggressDesc": MessageLookupByLibrary.simpleMessage(
+      "Filtra tareas por fecha y mantén un registro de tus logros diarios",
+    ),
+    "trackProggressTitle": MessageLookupByLibrary.simpleMessage(
+      "Sigue Tu Progreso",
+    ),
+    "welcome": MessageLookupByLibrary.simpleMessage(
+      "Bienvenido al Gestor de Tareas",
     ),
   };
 }
