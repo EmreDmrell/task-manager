@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/features/auth/cubit/auth_cubit.dart';
 import 'package:frontend/features/auth/pages/login_page.dart';
+import 'package:frontend/generated/l10n.dart';
 
 class SignupPage extends StatefulWidget {
   static const routeName = '/signup';
@@ -48,8 +49,8 @@ class _SignupPageState extends State<SignupPage> {
           );
         } else if (state is AuthSignUp) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("Account created! Login NOW!"),
+            SnackBar(
+              content: Text(S.current.accountCreated),
             ),
           );
         }
@@ -62,7 +63,7 @@ class _SignupPageState extends State<SignupPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Sign Up',
+                Text(S.current.signUp,
                     style: Theme.of(context).textTheme.displayLarge?.copyWith(
                           fontSize: 50,
                         )),
@@ -70,11 +71,11 @@ class _SignupPageState extends State<SignupPage> {
                 TextFormField(
                   controller: nameController,
                   decoration: InputDecoration(
-                    hintText: 'Name',
+                    hintText: S.current.name,
                   ),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Name field cannot be empty';
+                      return S.current.nameFieldEmpty;
                     }
                     return null;
                   },
@@ -83,14 +84,14 @@ class _SignupPageState extends State<SignupPage> {
                 TextFormField(
                   controller: emailController,
                   decoration: InputDecoration(
-                    hintText: 'Email',
+                    hintText: S.current.email,
                   ),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value == null ||
                         value.trim().isEmpty ||
                         !value.trim().contains('@')) {
-                      return 'Email field is invalid';
+                      return S.current.invalidEmail;
                     }
                     return null;
                   },
@@ -99,14 +100,14 @@ class _SignupPageState extends State<SignupPage> {
                 TextFormField(
                   controller: passwordController,
                   decoration: InputDecoration(
-                    hintText: 'Password',
+                    hintText: S.current.password,
                   ),
                   obscureText: true,
                   validator: (value) {
                     if (value == null ||
                         value.trim().isEmpty ||
                         value.trim().length < 6) {
-                      return 'Password field cannot be empty';
+                      return S.current.passwordFieldEmpty;
                     }
                     return null;
                   },
@@ -115,7 +116,7 @@ class _SignupPageState extends State<SignupPage> {
                 ElevatedButton(
                   onPressed: signUpUser,
                   child: Text(
-                    'SIGN UP',
+                    S.current.signUp.toUpperCase(),
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Colors.white,
                         ),
@@ -128,11 +129,11 @@ class _SignupPageState extends State<SignupPage> {
                   },
                   child: RichText(
                     text: TextSpan(
-                      text: 'Already have an account? ',
+                      text: S.current.alreadyHaveAccount,
                       style: Theme.of(context).textTheme.titleMedium,
                       children: [
                         TextSpan(
-                          text: 'Sign In',
+                          text: S.current.signIn,
                           style:
                               Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     color: Colors.blue,

@@ -1,0 +1,75 @@
+{
+  "appTitle": "Görev Uygulaması",
+
+  "logIn": "Giriş Yap",
+  "signIn": "Giriş Yap",
+  "signUp": "Kayıt Ol",
+  "logOut": "Çıkış Yap",
+  "accountCreated": "Hesap oluşturuldu. ŞİMDİ GİRİŞ YAPIN!",
+  "dontHaveAccount": "Hesabınız yok mu?",
+
+
+  "email": "E-posta",
+  "password": "Şifre",
+  "name": "İsim",
+  "nameFieldEmpty": "İsim alanı boş bırakılamaz",
+  "emailFieldEmpty": "E-posta alanı boş bırakılamaz",
+  "passwordFieldEmpty": "Şifre alanı boş bırakılamaz",
+  "alreadyHaveAccount": "Zaten hesabınız var mı?",
+  "invalidEmail" : "Email alanı geçersiz",
+  
+  "home": "Ana Sayfa",
+  "tasks": "Görevlerim",
+  "settings": "Ayarlar",
+  "themeSettings": "Tema Ayarları",
+
+
+  "syncTaskError": "Görevler senkronize edilemedi",
+  
+
+
+  "darkMode": "Karanlık Mod",
+  "lightMode": "Aydınlık Mod",
+
+
+  "addTask": "Yeni Görev Ekle",
+  "editTask": "Görevi Düzenle",
+  "deleteTask": "Görevi Sil",
+  "taskTitle": "Görev Başlığı",
+  "taskDescription": "Görev Açıklaması",
+  
+  "addTaskSuccess": "Görev başarıyla eklendi!",
+  
+  "title": "Başlık",
+  "titleEmpty": "Başlık boş bırakılamaz",
+  
+  "description": "Açıklama",
+  "descriptionEmpty": "Açıklama boş bırakılamaz",
+  "selectColorforTask": "Göreviniz için bir renk seçin",
+  "selectColor": "Renk Seç",
+  "selectShade": "Farklı bir ton seçin",
+
+
+  "save": "Kaydet",
+  "cancel": "İptal",
+
+
+  "getStarted": "Başla",
+  "next": "İleri",
+  "skip": "Atla",
+  "done": "Tamam",
+  "onboardingTitle1": "Görevleri Yönet",
+  "onboardingTitle2": "İlerlemeyi Takip Et",
+  "onboardingTitle3": "Düzenli Kal",
+  "onboardingDesc1": "Günlük görevlerini verimli bir şekilde oluştur ve yönet",
+  "onboardingDesc2": "İlerlemeni ve başarılarını takip et",
+  "onboardingDesc3": "Düzenli kal ve üretkenliğini artır",
+
+  "selectDueDateShowcase": "Bitiş tarihini seçmek için dokun",
+  "enterTaskTitleShowcase": "Görev başlığını buraya girin",
+  "enterTaskDescriptionShowcase": "Görev açıklamasını buraya girin",
+  "addTaskShowcase": "Yeni görev eklemek için buraya dokun",
+  "selectDateShowcase": "Görevleri tarihe göre filtrelemek için tarih seçin",
+  "deleteTaskShowcase": "Görevi silmek için sola kaydırın",
+  "listTaskShowcase": "Görevlerinizi burada görebilirsiniz"
+}

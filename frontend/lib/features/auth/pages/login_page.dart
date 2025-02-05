@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/features/auth/cubit/auth_cubit.dart';
 import 'package:frontend/features/auth/pages/signup_page.dart';
 import 'package:frontend/features/home/pages/home_page.dart';
+import 'package:frontend/generated/l10n.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = '/login';
@@ -57,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Log In',
+                  Text(S.current.logIn,
                       style: Theme.of(context).textTheme.displayLarge?.copyWith(
                             fontSize: 50,
                           )),
@@ -65,12 +66,12 @@ class _LoginPageState extends State<LoginPage> {
                   TextFormField(
                     controller: emailController,
                     decoration: InputDecoration(
-                      hintText: 'Email',
+                      hintText: S.current.email,
                     ),
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return 'Email field is invalid';
+                        return S.current.emailFieldEmpty;
                       }
                       return null;
                     },
@@ -79,13 +80,13 @@ class _LoginPageState extends State<LoginPage> {
                   TextFormField(
                     controller: passwordController,
                     decoration: InputDecoration(
-                      hintText: 'Password',
+                      hintText: S.current.password,
                     ),
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: true,
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return 'Password field cannot be empty';
+                        return S.current.passwordFieldEmpty;
                       }
                       return null;
                     },
@@ -94,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                   ElevatedButton(
                     onPressed: loginUser,
                     child: Text(
-                      'LOGIN',
+                      S.current.signIn,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: Colors.white,
                           ),
@@ -106,11 +107,11 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.pushNamed(context, SignupPage.routeName),
                     child: RichText(
                       text: TextSpan(
-                        text: 'Don\'t have an account? ',
+                        text: S.current.dontHaveAccount,
                         style: Theme.of(context).textTheme.titleMedium,
                         children: [
                           TextSpan(
-                            text: 'Sign Up',
+                            text: S.current.signUp,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium

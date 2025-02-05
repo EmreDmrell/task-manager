@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/features/auth/cubit/auth_cubit.dart';
 import 'package:frontend/features/home/cubit/tasks_cubit.dart';
 import 'package:frontend/features/home/pages/home_page.dart';
+import 'package:frontend/generated/l10n.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:showcaseview/showcaseview.dart';
@@ -82,11 +83,11 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add New Task"),
+        title: Text(S.current.addTask),
         actions: [
           Showcase(
             key: _dateKey,
-            description: 'Tap here to select due date',
+            description: S.current.selectDueDateShowcase,
             child: GestureDetector(
               onTap: () async {
                 final selectedDateValue = await showDatePicker(
@@ -119,7 +120,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
             );
           } else if (state is AddNewTaskSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Task added successfully!")),
+              SnackBar(content: Text(S.current.addTaskSuccess)),
             );
             Navigator.pushNamedAndRemoveUntil(
                 context, HomePage.routeName, (_) => false);
@@ -140,15 +141,15 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                 children: [
                   Showcase(
                     key: _titleKey,
-                    description: 'Enter your task title here',
+                    description: S.current.enterTaskTitleShowcase,
                     child: TextFormField(
                       controller: titleController,
-                      decoration: const InputDecoration(
-                        hintText: 'Title',
+                      decoration: InputDecoration(
+                        hintText: S.current.title,
                       ),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Title cannot be empty';
+                          return S.current.titleEmpty;
                         }
                         return null;
                       },
@@ -156,16 +157,16 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                   ),
                   Showcase(
                     key: _descriptionKey,
-                    description: 'Enter your task description here',
+                    description: S.current.enterTaskDescriptionShowcase,
                     child: TextFormField(
                       controller: descriptionController,
-                      decoration: const InputDecoration(
-                        hintText: 'Description',
+                      decoration: InputDecoration(
+                        hintText: S.current.description,
                       ),
                       maxLines: 4,
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Description cannot be empty';
+                          return S.current.descriptionEmpty;
                         }
                         return null;
                       },
@@ -173,10 +174,10 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                   ),
                   Showcase(
                     key: _colorKey,
-                    description: 'Select a color for your task',
+                    description: S.current.selectColorforTask,
                     child: ColorPicker(
-                      heading: const Text('Select Color'),
-                      subheading: const Text('Select a different shade'),
+                      heading: Text(S.current.selectColor),
+                      subheading: Text(S.current.selectShade),
                       onColorChanged: (Color color) {
                         setState(() {
                           selectedColor = color;
@@ -195,7 +196,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                   ),
                   ElevatedButton(
                     onPressed: createNewTask,
-                    child: Text('SUBMIT',
+                    child: Text(S.current.save.toUpperCase(),
                         style: Theme.of(context).textTheme.bodyLarge),
                   ),
                 ],

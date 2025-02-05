@@ -6,11 +6,13 @@ import 'package:frontend/features/auth/pages/login_page.dart';
 import 'package:frontend/features/home/cubit/tasks_cubit.dart';
 import 'package:frontend/features/home/pages/home_page.dart';
 import 'package:frontend/features/onboarding/pages/onboarding_screen.dart';
+import 'package:frontend/generated/l10n.dart';
 import 'package:frontend/router.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:frontend/core/theme/theme_provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(ShowCaseWidget(
@@ -58,6 +60,14 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+      locale: const Locale('es'),
       title: 'Task App',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,

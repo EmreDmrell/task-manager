@@ -1,0 +1,78 @@
+{
+  "appTitle": "Aplicación de Tareas",
+  "logIn" : "Iniciar Sesión",
+  "signIn": "Iniciar Sesión",
+  "signUp": "Registrarse",
+  "logOut": "Cerrar Sesión",
+  "dontHaveAccount": "¿No tienes una cuenta?",
+  "accountCreated": "¡Cuenta creada! ¡Inicia sesión AHORA!",
+
+
+  "email": "Correo Electrónico",
+  "password": "Contraseña",
+  "name": "Nombre",
+  "nameFieldEmpty": "El campo de nombre no puede estar vacío",
+  "emailFieldEmpty": "El campo de correo no puede estar vacío",
+  "passwordFieldEmpty": "El campo de contraseña no puede estar vacío",
+  "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+  "invalidEmail" : "El campo de correo electrónico no es válido",
+  
+
+
+  "home": "Inicio",
+  "tasks": "Mis Tareas",
+  "settings": "Ajustes",
+  "themeSettings": "Ajustes de Tema",
+
+
+  "syncTaskError": "Error al sincronizar las tareas",
+  
+
+  
+  "darkMode": "Modo Oscuro",
+  "lightMode": "Modo Claro",
+
+
+
+  "addTask": "Agregar Nuevo Tarea",
+  "editTask": "Editar Tarea",
+  "deleteTask": "Eliminar Tarea",
+  "taskTitle": "Título de la Tarea",
+  "taskDescription": "Descripción de la Tarea",
+  
+  "addTaskSuccess": "¡Tarea agregada exitosamente!",
+  
+  "title": "Título",
+  "titleEmpty": "El título no puede estar vacío",
+  
+  "description": "Descripción",
+  "descriptionEmpty": "La descripción no puede estar vacía",
+  "selectColorforTask": "Seleccione un color para su tarea",
+  "selectColor": "Seleccionar Color",
+  "selectShade": "Seleccione un tono diferente",
+
+
+  "save": "Guardar",
+  "cancel": "Cancelar",
+
+
+  "getStarted": "Comenzar",
+  "next": "Siguiente",
+  "skip": "Saltar",
+  "done": "Listo",
+  "onboardingTitle1": "Gestionar Tareas",
+  "onboardingTitle2": "Seguir Progreso",
+  "onboardingTitle3": "Mantenerse Organizado",
+  "onboardingDesc1": "Crea y gestiona tus tareas diarias de manera eficiente",
+  "onboardingDesc2": "Realiza un seguimiento de tu progreso y logros",
+  "onboardingDesc3": "Mantente organizado y aumenta tu productividad",
+
+
+  "selectDueDateShowcase": "Toca aquí para seleccionar la fecha de vencimiento",
+  "enterTaskDescriptionShowcase": "Ingrese la descripción de su tarea aquí",
+  "enterTaskTitleShowcase": "Ingrese el título de su tarea aquí",
+  "addTaskShowcase": "Toca aquí para agregar una nueva tarea",
+  "selectDateShowcase": "Selecciona una fecha para filtrar tareas por fecha",
+  "deleteTaskShowcase": "Desliza hacia la izquierda para eliminar la tarea",
+  "listTaskShowcase": "Puedes ver tus tareas aquí"
+}

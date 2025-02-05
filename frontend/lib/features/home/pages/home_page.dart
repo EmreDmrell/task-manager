@@ -11,6 +11,7 @@ import 'package:frontend/features/home/pages/add_new_task_page.dart';
 import 'package:frontend/features/home/widgets/date_selector.dart';
 import 'package:frontend/features/home/widgets/task_card.dart';
 import 'package:frontend/features/settings/theme_settings_page.dart';
+import 'package:frontend/generated/l10n.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:showcaseview/showcaseview.dart';
@@ -124,7 +125,8 @@ class _HomePageState extends State<HomePage> {
       } catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Failed to sync tasks: ${e.toString()}')),
+            SnackBar(
+                content: Text('${S.current.syncTaskError}: ${e.toString()}')),
           );
         }
       } finally {
@@ -151,14 +153,14 @@ class _HomePageState extends State<HomePage> {
                 ),
                 child: Center(
                   child: Text(
-                    'Task App',
+                    S.current.appTitle,
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
                 ),
               ),
               ListTile(
                 leading: const Icon(Icons.palette_outlined),
-                title: const Text('Theme Settings'),
+                title: Text(S.current.themeSettings),
                 onTap: () {
                   Navigator.pushNamed(context, ThemeSettingsPage.routeName);
                 },
@@ -176,7 +178,7 @@ class _HomePageState extends State<HomePage> {
                 },
                 child: ListTile(
                   leading: const Icon(Icons.logout),
-                  title: const Text('Logout'),
+                  title: Text(S.current.logOut),
                   onTap: () {
                     context.read<AuthCubit>().logout();
                   },
@@ -187,11 +189,11 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         appBar: AppBar(
-          title: const Text("My Tasks"),
+          title: Text(S.current.tasks),
           actions: [
             Showcase(
               key: _addTaskKey,
-              description: 'Tap here to add a new task',
+              description: S.current.addTaskShowcase,
               child: IconButton(
                 onPressed: () {
                   Navigator.pushNamed(context, AddNewTaskPage.routeName);
@@ -227,7 +229,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Showcase(
                     key: _dateFilterKey,
-                    description: 'Select date to filter tasks by date',
+                    description: S.current.selectDateShowcase,
                     child: DateSelector(
                       selectedDate: selectedDate,
                       onTap: (date) {
@@ -248,7 +250,7 @@ class _HomePageState extends State<HomePage> {
                         _deleteTaskKeys.putIfAbsent(task.id, () => GlobalKey());
                         return Showcase(
                           key: _deleteTaskKeys[task.id]!,
-                          description: 'Slide left to delete task',
+                          description: S.current.deleteTaskShowcase,
                           child: Dismissible(
                             key: Key(task.id),
                             direction: DismissDirection.endToStart,
@@ -308,7 +310,7 @@ class _HomePageState extends State<HomePage> {
             }
             return Showcase(
               key: _listTasksKey,
-              description: 'You can see your tasks here',
+              description: S.current.listTaskShowcase,
               child: const SizedBox(),
             );
           },

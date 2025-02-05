@@ -1,0 +1,74 @@
+{
+    "appTitle": "Task App",
+
+    "logIn": "Log In",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "logOut": "Log Out",
+    "dontHaveAccount": "Don't have an account?",
+    "accountCreated": "Account created! Login NOW!",
+
+
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "nameFieldEmpty": "Email field cannot be empty",
+    "emailFieldEmpty": "Email field cannot be empty",
+    "passwordFieldEmpty": "Password field cannot be empty",
+    "invalidEmail" : "Email field is invalid",
+    "alreadyHaveAccount": "Already have an account?",
+    
+
+
+    "home": "Home",
+    "tasks": "My Tasks",
+    "settings": "Settings",
+    "themeSettings": "ThemeSettings",
+
+    "syncTaskError": "Failed to sync tasks",
+
+    
+
+
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode",
+
+
+    "addTask": "Add New Task",
+    "editTask": "Edit Task",
+    "deleteTask": "Delete Task",
+    "taskTitle": "Task Title",
+    "taskDescription": "Task Description",
+    "addTaskSuccess" : "Task added successfully!",
+    "title" : "Title",
+    "titleEmpty": "Title cannot be empty",
+    "description" : "Description",
+    "descriptionEmpty": "Description cannot be empty",
+    "selectColorforTask" : "Select a color for your task",
+    "selectColor": "Select Color",
+    "selectShade": "Select a different shade",
+
+
+    "save": "Save",
+    "cancel": "Cancel",
+
+
+    "getStarted": "Get Started",
+    "next": "Next",
+    "skip": "Skip",
+    "done": "Done",
+    "onboardingTitle1": "Manage Tasks",
+    "onboardingTitle2": "Track Progress",
+    "onboardingTitle3": "Stay Organized",
+    "onboardingDesc1": "Create and manage your daily tasks efficiently",
+    "onboardingDesc2": "Keep track of your progress and achievements",
+    "onboardingDesc3": "Stay organized and boost your productivity",
+
+    "selectDueDateShowcase" : "Tap here to select due date",
+    "enterTaskTitleShowcase": "Enter your task title here",
+    "enterTaskDescriptionShowcase" : "Enter your task description here",
+    "addTaskShowcase": "Tap here to add a new task",
+    "selectDateShowcase": "Select date to filter tasks by date",
+    "deleteTaskShowcase": "Slide left to delete task",
+    "listTaskShowcase": "You can see your tasks here"   
+}
