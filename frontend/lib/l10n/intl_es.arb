@@ -21,6 +21,10 @@
 
   "home": "Inicio",
   "tasks": "Mis Tareas",
+
+  "syncDeleted": "Tareas eliminadas sincronizadas",
+  "tasksSynced": "Tareas sincronizadas",
+
   "settings": "Ajustes",
   "themeSettings": "Ajustes de Tema",
   "languageSettings": "Ajustes de Idioma",

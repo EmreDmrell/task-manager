@@ -20,6 +20,10 @@
   
   "home": "Ana Sayfa",
   "tasks": "Görevlerim",
+
+  "syncDeleted": "Silinen görevler senkronize edildi",
+  "tasksSynced": "Görevler senkronize edildi",
+
   "settings": "Ayarlar",
   "themeSettings": "Tema Ayarları",
   "languageSettings": "Dil Ayarları",

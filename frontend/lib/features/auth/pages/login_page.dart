@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/core/widgets/snackbars.dart';
 import 'package:frontend/features/auth/cubit/auth_cubit.dart';
 import 'package:frontend/features/auth/pages/signup_page.dart';
 import 'package:frontend/features/home/pages/home_page.dart';
@@ -40,11 +41,7 @@ class _LoginPageState extends State<LoginPage> {
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.error),
-              ),
-            );
+            AppSnackbars.showErrorSnackbar(context, message: state.error);
           } else if (state is AuthLoggedIn) {
             Navigator.pushNamedAndRemoveUntil(
                 context, HomePage.routeName, (route) => false);

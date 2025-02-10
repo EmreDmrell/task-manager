@@ -23,6 +23,9 @@
     "home": "Home",
     "tasks": "My Tasks",
 
+    "syncDeleted": "Deleted Tasks synced",
+    "tasksSynced": "Tasks synced",
+
 
     "settings": "Settings",
     "languageSettings": "Language Settings",

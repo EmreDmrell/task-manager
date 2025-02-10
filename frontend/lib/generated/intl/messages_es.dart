@@ -116,6 +116,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "stayOrganizedTitle": MessageLookupByLibrary.simpleMessage(
       "Mantente Organizado",
     ),
+    "syncDeleted": MessageLookupByLibrary.simpleMessage(
+      "Tareas eliminadas sincronizadas",
+    ),
     "syncTaskDesc": MessageLookupByLibrary.simpleMessage(
       "Tus tareas se sincronizan automáticamente cuando estás en línea, accede a ellas desde cualquier lugar",
     ),
@@ -133,6 +136,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "taskTitle": MessageLookupByLibrary.simpleMessage("Título de la Tarea"),
     "tasks": MessageLookupByLibrary.simpleMessage("Mis Tareas"),
+    "tasksSynced": MessageLookupByLibrary.simpleMessage("Tareas sincronizadas"),
     "themeSettings": MessageLookupByLibrary.simpleMessage("Ajustes de Tema"),
     "title": MessageLookupByLibrary.simpleMessage("Título"),
     "titleEmpty": MessageLookupByLibrary.simpleMessage(

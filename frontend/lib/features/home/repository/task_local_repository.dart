@@ -66,12 +66,12 @@ class TaskLocalRepository {
     await batch.commit(noResult: true);
   }
 
-  Future<List<TaskModel>> getTasks() async {
+  Future<List<TaskModel>> getTasks({required String uid}) async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query(
       tableName,
-      where: 'isDeleted = ?',
-      whereArgs: [0],
+      where: 'isDeleted = ? AND uid = ?',
+      whereArgs: [0, uid],
     );
     if (maps.isNotEmpty) {
       return List.generate(maps.length, (i) {

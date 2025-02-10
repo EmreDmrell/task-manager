@@ -110,6 +110,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sezgisel görev yönetimi uygulamamızla düzenli kal ve üretkenliğini artır",
     ),
     "stayOrganizedTitle": MessageLookupByLibrary.simpleMessage("Düzenli Kal"),
+    "syncDeleted": MessageLookupByLibrary.simpleMessage(
+      "Silinen görevler senkronize edildi",
+    ),
     "syncTaskDesc": MessageLookupByLibrary.simpleMessage(
       "Çevrimiçi olduğunuzda görevleriniz otomatik olarak senkronize edilir, her yerden erişin",
     ),
@@ -123,6 +126,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "taskDescription": MessageLookupByLibrary.simpleMessage("Görev Açıklaması"),
     "taskTitle": MessageLookupByLibrary.simpleMessage("Görev Başlığı"),
     "tasks": MessageLookupByLibrary.simpleMessage("Görevlerim"),
+    "tasksSynced": MessageLookupByLibrary.simpleMessage(
+      "Görevler senkronize edildi",
+    ),
     "themeSettings": MessageLookupByLibrary.simpleMessage("Tema Ayarları"),
     "title": MessageLookupByLibrary.simpleMessage("Başlık"),
     "titleEmpty": MessageLookupByLibrary.simpleMessage(

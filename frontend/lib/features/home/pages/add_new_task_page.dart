@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/core/widgets/snackbars.dart';
 import 'package:frontend/features/auth/cubit/auth_cubit.dart';
 import 'package:frontend/features/home/cubit/tasks_cubit.dart';
 import 'package:frontend/features/home/pages/home_page.dart';
@@ -115,13 +116,10 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
       body: BlocConsumer<TasksCubit, TasksState>(
         listener: (context, state) {
           if (state is TasksError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.error)),
-            );
+            AppSnackbars.showErrorSnackbar(context, message: state.error);
           } else if (state is AddNewTaskSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(S.current.addTaskSuccess)),
-            );
+            AppSnackbars.showSuccessSnackbar(context,
+                message: S.current.addTaskSuccess);
             Navigator.pushNamedAndRemoveUntil(
                 context, HomePage.routeName, (_) => false);
           }
@@ -136,72 +134,75 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
             padding: EdgeInsets.all(20.0),
             child: Form(
               key: formKey,
-              child: Column(
-                spacing: 10,
-                children: [
-                  Showcase(
-                    key: _titleKey,
-                    description: S.current.enterTaskTitleShowcase,
-                    child: TextFormField(
-                      controller: titleController,
-                      decoration: InputDecoration(
-                        hintText: S.current.title,
+              child: SingleChildScrollView(
+                child: Column(
+                  spacing: 10,
+                  children: [
+                    Showcase(
+                      key: _titleKey,
+                      description: S.current.enterTaskTitleShowcase,
+                      child: TextFormField(
+                        controller: titleController,
+                        decoration: InputDecoration(
+                          hintText: S.current.title,
+                        ),
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return S.current.titleEmpty;
+                          }
+                          return null;
+                        },
                       ),
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return S.current.titleEmpty;
-                        }
-                        return null;
-                      },
                     ),
-                  ),
-                  Showcase(
-                    key: _descriptionKey,
-                    description: S.current.enterTaskDescriptionShowcase,
-                    child: TextFormField(
-                      controller: descriptionController,
-                      decoration: InputDecoration(
-                        hintText: S.current.description,
+                    Showcase(
+                      key: _descriptionKey,
+                      description: S.current.enterTaskDescriptionShowcase,
+                      child: TextFormField(
+                        controller: descriptionController,
+                        decoration: InputDecoration(
+                          hintText: S.current.description,
+                        ),
+                        maxLines: 4,
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return S.current.descriptionEmpty;
+                          }
+                          return null;
+                        },
                       ),
-                      maxLines: 4,
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return S.current.descriptionEmpty;
-                        }
-                        return null;
-                      },
                     ),
-                  ),
-                  Showcase(
-                    key: _colorKey,
-                    description: S.current.selectColorforTask,
-                    child: ColorPicker(
-                      heading: Text(S.current.selectColor),
-                      subheading: Text(S.current.selectShade),
-                      onColorChanged: (Color color) {
-                        setState(() {
-                          selectedColor = color;
-                        });
-                      },
-                      color: selectedColor,
-                      pickersEnabled: const <ColorPickerType, bool>{
-                        ColorPickerType.both: false,
-                        ColorPickerType.primary: true,
-                        ColorPickerType.accent: false,
-                        ColorPickerType.bw: false,
-                        ColorPickerType.custom: false,
-                        ColorPickerType.wheel: true,
-                      },
+                    Showcase(
+                      key: _colorKey,
+                      description: S.current.selectColorforTask,
+                      child: ColorPicker(
+                        heading: Text(S.current.selectColor),
+                        subheading: Text(S.current.selectShade),
+                        onColorChanged: (Color color) {
+                          setState(() {
+                            selectedColor = color;
+                          });
+                        },
+                        color: selectedColor,
+                        pickersEnabled: const <ColorPickerType, bool>{
+                          ColorPickerType.both: false,
+                          ColorPickerType.primary: true,
+                          ColorPickerType.accent: false,
+                          ColorPickerType.bw: false,
+                          ColorPickerType.custom: false,
+                          ColorPickerType.wheel: true,
+                        },
+                      ),
                     ),
-                  ),
-                  ElevatedButton(
-                    onPressed: createNewTask,
-                    child: Text(S.current.save.toUpperCase(),
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              color: Colors.white,
-                            )),
-                  ),
-                ],
+                    ElevatedButton(
+                      onPressed: createNewTask,
+                      child: Text(S.current.save.toUpperCase(),
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    color: Colors.white,
+                                  )),
+                    ),
+                  ],
+                ),
               ),
             ),
           );

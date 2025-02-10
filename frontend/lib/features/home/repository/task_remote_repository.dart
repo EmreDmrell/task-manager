@@ -68,7 +68,8 @@ class TaskRemoteRepository {
     }
   }
 
-  Future<List<TaskModel>> getTasks({required String token}) async {
+  Future<List<TaskModel>> getTasks(
+      {required String token, required String uid}) async {
     try {
       final res = await http.get(
         Uri.parse("${Constants.backendUri}/tasks"),
@@ -94,7 +95,7 @@ class TaskRemoteRepository {
 
       return tasksList;
     } catch (e) {
-      final tasks = await taskLocalRepository.getTasks();
+      final tasks = await taskLocalRepository.getTasks(uid: uid);
       if (tasks.isNotEmpty) {
         return tasks;
       }

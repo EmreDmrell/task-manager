@@ -116,6 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "stayOrganizedTitle": MessageLookupByLibrary.simpleMessage(
       "Stay Organized",
     ),
+    "syncDeleted": MessageLookupByLibrary.simpleMessage("Deleted Tasks synced"),
     "syncTaskDesc": MessageLookupByLibrary.simpleMessage(
       "Your tasks are automatically synced when you\'re online, access them anywhere",
     ),
@@ -129,6 +130,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "taskDescription": MessageLookupByLibrary.simpleMessage("Task Description"),
     "taskTitle": MessageLookupByLibrary.simpleMessage("Task Title"),
     "tasks": MessageLookupByLibrary.simpleMessage("My Tasks"),
+    "tasksSynced": MessageLookupByLibrary.simpleMessage("Tasks synced"),
     "themeSettings": MessageLookupByLibrary.simpleMessage("ThemeSettings"),
     "title": MessageLookupByLibrary.simpleMessage("Title"),
     "titleEmpty": MessageLookupByLibrary.simpleMessage("Title cannot be empty"),

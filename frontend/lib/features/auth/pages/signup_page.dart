@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/core/widgets/snackbars.dart';
 import 'package:frontend/features/auth/cubit/auth_cubit.dart';
 import 'package:frontend/features/auth/pages/login_page.dart';
 import 'package:frontend/generated/l10n.dart';
@@ -42,17 +43,10 @@ class _SignupPageState extends State<SignupPage> {
         body: BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.error),
-            ),
-          );
+          AppSnackbars.showErrorSnackbar(context, message: state.error);
         } else if (state is AuthSignUp) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(S.current.accountCreated),
-            ),
-          );
+          AppSnackbars.showSuccessSnackbar(context,
+              message: S.current.accountCreated);
         }
       },
       builder: (context, state) {

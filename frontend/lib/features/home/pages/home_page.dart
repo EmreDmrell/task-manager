@@ -4,6 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/constants/utils.dart';
+import 'package:frontend/core/widgets/snackbars.dart';
 import 'package:frontend/features/auth/cubit/auth_cubit.dart';
 import 'package:frontend/features/auth/pages/login_page.dart';
 import 'package:frontend/features/home/cubit/tasks_cubit.dart';
@@ -29,6 +30,7 @@ class _HomePageState extends State<HomePage> {
   DateTime selectedDate = DateTime.now();
   late TasksCubit tasksCubit;
   late String userToken;
+  late String userUid;
   StreamSubscription? _connectivitySubscription;
   final GlobalKey _addTaskKey = GlobalKey();
   final GlobalKey _dateFilterKey = GlobalKey();
@@ -90,10 +92,11 @@ class _HomePageState extends State<HomePage> {
     if (authCubit.state is AuthLoggedIn) {
       final user = (authCubit.state as AuthLoggedIn).user;
       userToken = user.token;
+      userUid = user.id;
       tasksCubit = context.read<TasksCubit>();
 
       // Initial tasks fetch
-      tasksCubit.getTasks(token: userToken);
+      tasksCubit.getTasks(token: userToken, uid: userUid);
 
       // Setup connectivity listener
       _setupConnectivityListener();
@@ -119,16 +122,22 @@ class _HomePageState extends State<HomePage> {
     if (hasInternet) {
       try {
         _isSyncing = true;
-        await tasksCubit.syncDeletedTasks(token: userToken);
+        await tasksCubit.syncDeletedTasks(
+          context: context,
+          token: userToken,
+          uid: userUid,
+        );
         if (mounted) {
-          await tasksCubit.syncTasks(token: userToken);
+          await tasksCubit.syncTasks(
+            context: context,
+            token: userToken,
+            uid: userUid,
+          );
         }
       } catch (e) {
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-                content: Text('${S.current.syncTaskError}: ${e.toString()}')),
-          );
+          AppSnackbars.showErrorSnackbar(context,
+              message: '${S.current.syncTaskError}: ${e.toString()}');
         }
       } finally {
         _isSyncing = false;
@@ -274,9 +283,9 @@ class _HomePageState extends State<HomePage> {
                             ),
                             onDismissed: (direction) {
                               context.read<TasksCubit>().deleteTask(
-                                    token: userToken,
-                                    taskId: task.id,
-                                  );
+                                  token: userToken,
+                                  taskId: task.id,
+                                  uid: userUid);
                             },
                             child: Row(
                               children: [

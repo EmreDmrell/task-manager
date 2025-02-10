@@ -3,6 +3,7 @@ import 'package:frontend/core/services/sp_service.dart';
 import 'package:frontend/features/auth/repository/auth_local_repository.dart';
 import 'package:frontend/features/auth/repository/auth_remote_repository.dart';
 import 'package:frontend/models/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'auth_state.dart';
 
@@ -73,6 +74,13 @@ class AuthCubit extends Cubit<AuthState> {
   void logout() async {
     try {
       emit(AuthLoading());
+      // These are for development purpose dont use it in production
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setBool('hasSeenOnboarding', false);
+      prefs.setBool('hasSeenShowcase', false);
+      prefs.setBool('hasSeenDeletion', false);
+      prefs.setBool('hasSeenAddTaskShowcase', false);
+      //Remove token from shared preferences
       await spService.removeToken();
       emit(AuthInitial());
     } catch (e) {

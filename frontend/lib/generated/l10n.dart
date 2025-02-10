@@ -175,6 +175,26 @@ class S {
     return Intl.message('My Tasks', name: 'tasks', desc: '', args: []);
   }
 
+  /// `Deleted Tasks synced`
+  String get syncDeleted {
+    return Intl.message(
+      'Deleted Tasks synced',
+      name: 'syncDeleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tasks synced`
+  String get tasksSynced {
+    return Intl.message(
+      'Tasks synced',
+      name: 'tasksSynced',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Settings`
   String get settings {
     return Intl.message('Settings', name: 'settings', desc: '', args: []);

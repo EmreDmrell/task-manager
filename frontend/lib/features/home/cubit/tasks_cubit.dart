@@ -1,11 +1,15 @@
 import 'dart:ui';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/constants/utils.dart';
+import 'package:frontend/core/widgets/snackbars.dart';
 import 'package:frontend/features/home/repository/task_remote_repository.dart';
 import 'package:frontend/features/home/repository/task_local_repository.dart';
+import 'package:frontend/generated/l10n.dart';
 import 'package:frontend/models/task_model.dart';
+import 'package:path/path.dart';
 
 part 'tasks_state.dart';
 
@@ -39,10 +43,10 @@ class TasksCubit extends Cubit<TasksState> {
     }
   }
 
-  Future<void> getTasks({required String token}) async {
+  Future<void> getTasks({required String token, required String uid}) async {
     try {
       emit(TasksLoading());
-      final tasks = await taskRemoteRepository.getTasks(token: token);
+      final tasks = await taskRemoteRepository.getTasks(token: token, uid: uid);
       emit(GetTasksSuccess(tasks));
     } catch (e) {
       emit(TasksError(e.toString()));
@@ -52,6 +56,7 @@ class TasksCubit extends Cubit<TasksState> {
   Future<void> deleteTask({
     required String token,
     required String taskId,
+    required String uid,
   }) async {
     try {
       final connectivityResult = await Connectivity().checkConnectivity();
@@ -62,7 +67,8 @@ class TasksCubit extends Cubit<TasksState> {
         if (success) {
           await taskLocalRepository
               .deleteTask(taskId); // Hard delete if online delete successful
-          final tasks = await taskRemoteRepository.getTasks(token: token);
+          final tasks =
+              await taskRemoteRepository.getTasks(token: token, uid: uid);
           emit(GetTasksSuccess(tasks));
           return;
         }
@@ -71,7 +77,7 @@ class TasksCubit extends Cubit<TasksState> {
       // If offline or remote delete failed, do soft delete
       await taskLocalRepository.softDeleteTask(taskId);
       // Get updated tasks (will not include soft-deleted tasks)
-      final tasks = await taskLocalRepository.getTasks();
+      final tasks = await taskLocalRepository.getTasks(uid: uid);
       emit(GetTasksSuccess(tasks));
     } catch (e) {
       print('deleteTasks taskCubit: $e');
@@ -79,7 +85,11 @@ class TasksCubit extends Cubit<TasksState> {
     }
   }
 
-  Future<void> syncTasks({required String token}) async {
+  Future<void> syncTasks({
+    required BuildContext context,
+    required String token,
+    required String uid,
+  }) async {
     try {
       final unsyncedTasks = await taskLocalRepository.getUnsyncedTasks();
 
@@ -93,10 +103,13 @@ class TasksCubit extends Cubit<TasksState> {
         for (final task in unsyncedTasks) {
           await taskLocalRepository.updateRowValue(task.id, 1);
         }
+        AppSnackbars.showSuccessSnackbar(context,
+            message: S.current.tasksSynced);
         print('Tasks synced');
 
         // Fetch updated tasks from remote and update state
-        final tasks = await taskRemoteRepository.getTasks(token: token);
+        final tasks =
+            await taskRemoteRepository.getTasks(token: token, uid: uid);
         emit(GetTasksSuccess(tasks));
       }
     } catch (e) {
@@ -104,7 +117,11 @@ class TasksCubit extends Cubit<TasksState> {
     }
   }
 
-  Future<void> syncDeletedTasks({required String token}) async {
+  Future<void> syncDeletedTasks({
+    required BuildContext context,
+    required String token,
+    required String uid,
+  }) async {
     try {
       final unsyncedDeletedTasks =
           await taskLocalRepository.getUnsyncedDeletedTasks();
@@ -119,9 +136,12 @@ class TasksCubit extends Cubit<TasksState> {
         for (final task in unsyncedDeletedTasks) {
           await taskLocalRepository.deleteTask(task.id);
         }
+        AppSnackbars.showSuccessSnackbar(context,
+            message: S.current.syncDeleted);
         print('Deleted Tasks synced');
         // after deletion from remote database gets tasks to refresh the taskList
-        final tasks = await taskRemoteRepository.getTasks(token: token);
+        final tasks =
+            await taskRemoteRepository.getTasks(token: token, uid: uid);
         emit(GetTasksSuccess(tasks));
       }
     } catch (e) {
